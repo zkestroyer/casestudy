@@ -33,7 +33,16 @@ const PurchaseCreatePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    purchasesAPI.create({ supplier: supplierId, items: items.filter(i => i.product) })
+    const payloadItems = items.filter(i => i.product).map(i => ({
+      product: i.product,
+      quantity: i.quantity,
+      unit_cost: i.unit_price
+    }));
+    purchasesAPI.create({ 
+      supplier: supplierId, 
+      items: payloadItems,
+      order_date: new Date().toISOString().split('T')[0]
+    })
       .then(() => navigate('/purchases')).catch(console.error);
   };
 

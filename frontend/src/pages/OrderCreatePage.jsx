@@ -33,7 +33,11 @@ const OrderCreatePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ordersAPI.create({ customer: customerId, items: items.filter(i => i.product) })
+    ordersAPI.create({ 
+      customer: customerId, 
+      items: items.filter(i => i.product),
+      order_date: new Date().toISOString().split('T')[0]
+    })
       .then(() => navigate('/orders')).catch(console.error);
   };
 
