@@ -151,13 +151,6 @@ def dashboard(request):
         ).aggregate(Sum('total_amount'))['total_amount__sum'] or 0
         revenue_history.append({'name': month_name, 'revenue': month_sales})
 
-    # If no historical data exists (because DB is fresh), seed some static visual data for the chart layout
-    if sum(item['revenue'] for item in revenue_history) == 0:
-        revenue_history = [
-            {'name': (now - timedelta(days=30 * i)).strftime('%b'), 'revenue': [1200, 2100, 800, 3400, 1500, sales_total][5-i]} 
-            for i in range(5, -1, -1)
-        ]
-
     return Response({
         'total_products': total_products,
         'total_customers': total_customers,
