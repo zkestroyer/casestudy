@@ -19,11 +19,12 @@ class StockSerializer(serializers.ModelSerializer):
     product = serializers.PrimaryKeyRelatedField(read_only=True)
     product_name = serializers.CharField(source='product.name', read_only=True)
     product_sku = serializers.CharField(source='product.sku', read_only=True)
+    category_name = serializers.CharField(source='product.category.name', read_only=True)
     reorder_level = serializers.IntegerField(source='product.reorder_level', read_only=True)
 
     class Meta:
         model = Stock
-        fields = ('id', 'product', 'product_name', 'product_sku', 'quantity', 'reorder_level', 'updated_at')
+        fields = ('id', 'product', 'product_name', 'product_sku', 'category_name', 'quantity', 'reorder_level', 'updated_at')
 
 class ProductSerializer(serializers.ModelSerializer):
     """

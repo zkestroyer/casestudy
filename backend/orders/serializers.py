@@ -7,9 +7,11 @@ class PurchaseItemSerializer(serializers.ModelSerializer):
     PURPOSE: Validates individual item entries within a Purchase Order.
     READ_ONLY: 'subtotal' is read-only because it is automatically calculated in the model's save() method.
     """
+    product_name = serializers.CharField(source='product.name', read_only=True)
+    
     class Meta:
         model = PurchaseItem
-        fields = ('id', 'product', 'quantity', 'unit_cost', 'subtotal')
+        fields = ('id', 'product', 'product_name', 'quantity', 'unit_cost', 'subtotal')
         read_only_fields = ('subtotal',)
 
 class PurchaseOrderSerializer(serializers.ModelSerializer):
@@ -20,10 +22,11 @@ class PurchaseOrderSerializer(serializers.ModelSerializer):
     READ_ONLY: 'total_amount' is calculated on confirmation, 'created_by' is set automatically from request.
     """
     items = PurchaseItemSerializer(many=True)
+    supplier_name = serializers.CharField(source='supplier.name', read_only=True)
 
     class Meta:
         model = PurchaseOrder
-        fields = ('id', 'supplier', 'created_by', 'order_date', 'status', 'total_amount', 'created_at', 'items')
+        fields = ('id', 'supplier', 'supplier_name', 'created_by', 'order_date', 'status', 'total_amount', 'created_at', 'items')
         read_only_fields = ('total_amount', 'created_by')
 
     def create(self, validated_data):
@@ -45,9 +48,11 @@ class OrderItemSerializer(serializers.ModelSerializer):
     PURPOSE: Handles individual item entries within a Sales Order.
     READ_ONLY: 'subtotal' to prevent client-side tampering.
     """
+    product_name = serializers.CharField(source='product.name', read_only=True)
+
     class Meta:
         model = OrderItem
-        fields = ('id', 'product', 'quantity', 'unit_price', 'subtotal')
+        fields = ('id', 'product', 'product_name', 'quantity', 'unit_price', 'subtotal')
         read_only_fields = ('subtotal',)
 
 class SalesOrderSerializer(serializers.ModelSerializer):
@@ -56,10 +61,11 @@ class SalesOrderSerializer(serializers.ModelSerializer):
     NESTED PATTERN: Like PurchaseOrder, manages order and items transactionally from a single payload.
     """
     items = OrderItemSerializer(many=True)
+    customer_name = serializers.CharField(source='customer.name', read_only=True)
 
     class Meta:
         model = SalesOrder
-        fields = ('id', 'customer', 'created_by', 'order_date', 'status', 'total_amount', 'created_at', 'items')
+        fields = ('id', 'customer', 'customer_name', 'created_by', 'order_date', 'status', 'total_amount', 'created_at', 'items')
         read_only_fields = ('total_amount', 'created_by')
 
     def create(self, validated_data):

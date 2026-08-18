@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Business Inventory & Order Management System Documentation</title>
     <style>
-        /* Word Document Simulation CSS */
         body { 
             font-family: "Times New Roman", Times, serif; 
             font-size: 12pt;
@@ -22,22 +21,16 @@
             text-align: left;
         }
         h1 { font-size: 24pt; border-bottom: 2px solid #000; padding-bottom: 5px; page-break-before: always; }
-        h1:first-of-type { page-break-before: auto; } /* Don't break before the very first H1 */
+        h1:first-of-type { page-break-before: auto; }
         h2 { font-size: 18pt; border-bottom: 1px solid #ccc; padding-bottom: 5px; page-break-after: avoid; }
         h3 { font-size: 14pt; page-break-after: avoid; }
         p, li { page-break-inside: avoid; }
-        
-        /* Title Page */
         .title-page {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 80vh; 
+            display: block;
             text-align: center;
+            padding-top: 35%;
+            min-height: 80vh;
             page-break-after: always;
-            padding-top: 20%;
-            box-sizing: border-box;
         }
         .title-page h1 {
             font-family: "Calibri", "Arial", sans-serif;
@@ -56,115 +49,46 @@
             margin-top: 0;
             margin-bottom: 2em;
         }
-        .title-page .author {
-            font-size: 16pt;
-            font-weight: bold;
-            margin-top: 2em;
-        }
-        .title-page .date {
-            font-size: 14pt;
-            margin-top: 1em;
-            color: #555;
-        }
-
-        /* Tables & Code */
+        .title-page .author { font-size: 16pt; font-weight: bold; margin-top: 2em; }
+        .title-page .date { font-size: 14pt; margin-top: 1em; color: #555; }
         table { 
-            border-collapse: collapse; 
-            width: 100%; 
-            margin: 20px 0; 
-            font-size: 11pt; 
-            page-break-inside: avoid;
-            word-break: break-word;
+            border-collapse: collapse; width: 100%; margin: 20px 0; font-size: 11pt; 
+            page-break-inside: avoid; word-break: break-word;
         }
         table, th, td { border: 1px solid #000; }
         th, td { padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; font-weight: bold; }
-        
-        code { 
-            background-color: #f4f4f4; 
-            padding: 2px 4px; 
-            font-family: "Courier New", Courier, monospace; 
-            font-size: 10.5pt; 
-        }
-        pre {
-            page-break-inside: avoid;
-        }
-        pre code { 
-            display: block; 
-            padding: 15px; 
-            overflow-x: auto; 
-            background-color: #f8f9fa; 
-            border: 1px solid #ccc; 
-            white-space: pre-wrap; /* Forces code to wrap instead of breaking page width */
-        }
-        
-        /* Mermaid specific fixes to prevent cutoff */
-        .mermaid { 
-            margin: 30px 0; 
-            display: flex; 
-            justify-content: center; 
-            page-break-inside: avoid;
-            width: 100%;
-            overflow: hidden;
-        }
-        .mermaid svg {
-            max-width: 100% !important;
-            height: auto !important;
-        }
-
-        /* Print Settings */
+        code { background-color: #f4f4f4; padding: 2px 4px; font-family: "Courier New", Courier, monospace; font-size: 10.5pt; }
+        pre { page-break-inside: avoid; }
+        pre code { display: block; padding: 15px; overflow-x: auto; background-color: #f8f9fa; border: 1px solid #ccc; white-space: pre-wrap; }
+        .mermaid { margin: 30px 0; display: flex; justify-content: center; page-break-inside: avoid; width: 100%; overflow: hidden; }
+        .mermaid svg { max-width: 100% !important; height: auto !important; }
         @media print {
-            body { 
-                max-width: 100%; 
-                padding: 0; 
-                background: #fff;
-            }
-            .title-page {
-                min-height: auto;
-                height: 100%;
-                display: block; /* Flexbox can act weird in some print renderers */
-                padding-top: 40%; 
-            }
-            @page { 
-                margin: 0.75in; /* Slightly smaller margins to give the ERD more room */
-            }
-            /* Hide URL printing on links if browser allows */
+            body { max-width: 100%; padding: 0; background: #fff; }
+            .title-page { min-height: auto; height: 100%; display: block; padding-top: 40%; }
+            @page { margin: 0.75in; }
             a[href]:after { content: none !important; }
+            #print-btn { display: none; }
         }
-        
-        /* On-screen Print Button */
         #print-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background-color: #2F5496;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 14pt;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            z-index: 1000;
+            position: fixed; bottom: 20px; right: 20px; padding: 15px 25px;
+            background-color: #2F5496; color: white; border: none; border-radius: 5px;
+            font-size: 14pt; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000;
         }
         #print-btn:hover { background-color: #1a3668; }
-        @media print { #print-btn { display: none; } }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
-    <button id="print-btn" onclick="window.print()">🖨️ Save as PDF</button>
-
+    <button id="print-btn" onclick="window.print()">Save as PDF</button>
     <div class="title-page">
         <h1>Business Inventory & Order Management System</h1>
         <h2>System Architecture and Implementation Report</h2>
         <div class="author">Submitted by: Zainab Khan</div>
         <div class="date">August 2026</div>
     </div>
-
     <div id="content"></div>
-    
     <script type="text/markdown" id="markdown-content">
 ## 1. Introduction
 The Business Inventory & Order Management System is a comprehensive, centralized web application designed to streamline and automate core business operations. Its primary scope includes managing product inventory, tracking stock levels in real-time, facilitating purchase and sales order processing, and recording customer payments. The system provides role-based access to ensure data security and operational integrity.
@@ -201,7 +125,7 @@ Businesses need a centralized, reliable system for inventory and sales operation
 - **Purchase Management:** Create purchase orders, add items, and track order status (Draft, Pending, Confirmed).
 - **Sales Order Management:** Create sales orders, allocate stock, and track order status.
 - **Payment Management:** Record payments against specific sales orders.
-- **Dashboard:** Provide an overview of stock levels, recent orders, and key metrics.
+- **Dashboard:** Provide an actionable overview of business performance with KPI cards (Revenue, Orders, Customers, Low Stock), a Revenue Line Chart, Order Status Donut Chart, Recent Orders table, and Low Stock Alerts.
 
 ### Non-functional Requirements
 - **Performance:** API responses should be fast and efficient under typical load.
@@ -444,6 +368,7 @@ The system uses RESTful (Representational State Transfer) architecture. Resource
 | POST | `/api/orders/sales/` | Create sales order | Token |
 | GET | `/api/orders/payments/` | List payments | Token |
 | POST | `/api/orders/payments/` | Create payment | Token |
+| GET | `/api/orders/dashboard/` | Retrieve high-level metrics, charts data | Token |
 
 ## 13. Application Flow
 
@@ -530,10 +455,12 @@ The backend is structured into modular apps: `accounts`, `inventory`, and `order
 ## 16. React Frontend
 The frontend uses a modern React architecture powered by Vite.
 - **Pages:** Top-level components (e.g., Dashboard, Products, SalesOrders) that represent routes.
-- **Components:** Reusable UI elements (Buttons, Tables, Modals, Forms).
+- **Components:** Reusable UI elements (EmptyState, StatusBadge, DashboardCard, DataTable, etc.).
 - **Routing:** Handled via React Router (`react-router-dom`), mapping URL paths to Pages.
-- **API Services:** A dedicated layer (often using Axios) abstracts HTTP calls, keeping components clean.
+- **API Services:** A dedicated layer (using Axios) abstracts HTTP calls, keeping components clean.
 - **State Management:** React hooks (`useState`, `useEffect`, `useContext`) handle local component state and global auth state.
+- **Data Visualization:** The dashboard utilizes `Recharts` for interactive Line Charts (Revenue Overview) and Donut/Pie Charts (Order Status Breakdown).
+- **Iconography:** All icons are sourced from `lucide-react`, a consistent and professional SVG icon library, replacing emoji-based indicators.
 
 ## 17. Integration
 React integrates with Django via HTTP requests over the network. 
@@ -580,8 +507,11 @@ The finalized application provides a reliable, secure, and user-friendly interfa
    - *Challenge:* Managing token lifecycle securely in the React frontend.
    - *Solution:* Used Axios interceptors to automatically append tokens and handle 401 responses gracefully by redirecting to login.
 5. **Responsive Design:**
-   - *Challenge:* Data-heavy tables were difficult to view on mobile devices.
-   - *Solution:* Implemented TailwindCSS responsive classes to convert tables to card-based layouts on smaller screens.
+    - *Challenge:* Data-heavy tables and chart visualizations were difficult to view on mobile devices.
+    - *Solution:* Implemented CSS Grid-based responsive breakpoints (1024px, 768px, 480px) to stack KPI cards, collapse sidebar, and ensure charts reflow using Recharts' `ResponsiveContainer`.
+6. **Dashboard Data Visualization:**
+    - *Challenge:* The initial dashboard was a basic admin panel with only text-based KPI cards.
+    - *Solution:* Integrated Recharts for an interactive Revenue Line Chart and Order Status Donut Chart, and extended the backend `/api/dashboard/` endpoint with `revenue_history`, `order_status_breakdown`, and `low_stock_items` to feed these visualizations with real data.
 
 ## 22. Future Improvements
 1. **Automated Reorder Alerts:** Send email notifications when stock falls below the `reorder_level`.
@@ -592,20 +522,14 @@ The finalized application provides a reliable, secure, and user-friendly interfa
 6. **Role-based UI Rendering:** Hide UI elements completely based on the user's explicit role (Admin vs. Staff).
 
 ## 23. GitHub Repository
-Link: [https://github.com/placeholder/inventory-management-system]
+Link: [https://github.com/zkestroyer/casestudy](https://github.com/zkestroyer/casestudy)
 
 ## 24. Conclusion
 The Business Inventory & Order Management System successfully addresses the inefficiencies of manual tracking. By leveraging Django for a robust API and React for a dynamic frontend, the project delivers a scalable, maintainable, and secure solution. The careful database design ensures data integrity, while the modular architecture lays a strong foundation for future business growth and technological enhancement.
 </script>
-    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            mermaid.initialize({ 
-                startOnLoad: false, 
-                theme: 'default',
-                securityLevel: 'loose'
-            });
-            
+            mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'loose' });
             const renderer = new marked.Renderer();
             renderer.code = function(code) {
                 if (code.lang && code.lang.toLowerCase() === 'mermaid') {
@@ -613,19 +537,12 @@ The Business Inventory & Order Management System successfully addresses the inef
                 }
                 return '<pre><code class="language-' + code.lang + '">' + code.text.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</code></pre>';
             };
-            
             marked.use({ renderer });
-            
             const markdown = document.getElementById('markdown-content').textContent;
             document.getElementById('content').innerHTML = marked.parse(markdown);
-            
             setTimeout(() => {
-                mermaid.run({
-                    querySelector: '.mermaid'
-                }).then(() => {
-                    // Update print button text when ready
-                    const btn = document.getElementById('print-btn');
-                    btn.innerHTML = '🖨️ Save as PDF (Ready)';
+                mermaid.run({ querySelector: '.mermaid' }).then(() => {
+                    document.getElementById('print-btn').innerHTML = 'Save as PDF (Ready)';
                 });
             }, 300);
         });

@@ -17,7 +17,7 @@ const PaymentsPage = () => {
   const loadData = () => { setLoading(true); paymentsAPI.getAll().then(res => { setData(res.data); setLoading(false); }); };
   useEffect(() => { loadData(); ordersAPI.getAll().then(res => setOrders(res.data)); }, []);
 
-  const handleSave = () => { paymentsAPI.create(formData).then(() => { setModalOpen(false); loadData(); }); };
+  const handleSave = () => { paymentsAPI.create({...formData, sales_order: formData.order}).then(() => { setModalOpen(false); loadData(); }); };
 
   const columns = [
     { header: 'ID', field: 'id' },

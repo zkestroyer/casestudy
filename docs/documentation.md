@@ -35,7 +35,7 @@ Businesses need a centralized, reliable system for inventory and sales operation
 - **Purchase Management:** Create purchase orders, add items, and track order status (Draft, Pending, Confirmed).
 - **Sales Order Management:** Create sales orders, allocate stock, and track order status.
 - **Payment Management:** Record payments against specific sales orders.
-- **Dashboard:** Provide an overview of stock levels, recent orders, and key metrics.
+- **Dashboard:** Provide an actionable overview of business performance with KPI cards (Revenue, Orders, Customers, Low Stock), a Revenue Line Chart, Order Status Donut Chart, Recent Orders table, and Low Stock Alerts.
 
 ### Non-functional Requirements
 - **Performance:** API responses should be fast and efficient under typical load.
@@ -278,6 +278,7 @@ The system uses RESTful (Representational State Transfer) architecture. Resource
 | POST | `/api/orders/sales/` | Create sales order | Token |
 | GET | `/api/orders/payments/` | List payments | Token |
 | POST | `/api/orders/payments/` | Create payment | Token |
+| GET | `/api/orders/dashboard/` | Retrieve high-level metrics, charts data | Token |
 
 ## 13. Application Flow
 
@@ -364,10 +365,12 @@ The backend is structured into modular apps: `accounts`, `inventory`, and `order
 ## 16. React Frontend
 The frontend uses a modern React architecture powered by Vite.
 - **Pages:** Top-level components (e.g., Dashboard, Products, SalesOrders) that represent routes.
-- **Components:** Reusable UI elements (Buttons, Tables, Modals, Forms).
+- **Components:** Reusable UI elements (EmptyState, StatusBadge, DashboardCard, DataTable, etc.).
 - **Routing:** Handled via React Router (`react-router-dom`), mapping URL paths to Pages.
-- **API Services:** A dedicated layer (often using Axios) abstracts HTTP calls, keeping components clean.
+- **API Services:** A dedicated layer (using Axios) abstracts HTTP calls, keeping components clean.
 - **State Management:** React hooks (`useState`, `useEffect`, `useContext`) handle local component state and global auth state.
+- **Data Visualization:** The dashboard utilizes `Recharts` for interactive Line Charts (Revenue Overview) and Donut/Pie Charts (Order Status Breakdown).
+- **Iconography:** All icons are sourced from `lucide-react`, a consistent and professional SVG icon library, replacing emoji-based indicators.
 
 ## 17. Integration
 React integrates with Django via HTTP requests over the network. 
@@ -414,8 +417,11 @@ The finalized application provides a reliable, secure, and user-friendly interfa
    - *Challenge:* Managing token lifecycle securely in the React frontend.
    - *Solution:* Used Axios interceptors to automatically append tokens and handle 401 responses gracefully by redirecting to login.
 5. **Responsive Design:**
-   - *Challenge:* Data-heavy tables were difficult to view on mobile devices.
-   - *Solution:* Implemented TailwindCSS responsive classes to convert tables to card-based layouts on smaller screens.
+    - *Challenge:* Data-heavy tables and chart visualizations were difficult to view on mobile devices.
+    - *Solution:* Implemented CSS Grid-based responsive breakpoints (1024px, 768px, 480px) to stack KPI cards, collapse sidebar, and ensure charts reflow using Recharts' `ResponsiveContainer`.
+6. **Dashboard Data Visualization:**
+    - *Challenge:* The initial dashboard was a basic admin panel with only text-based KPI cards.
+    - *Solution:* Integrated Recharts for an interactive Revenue Line Chart and Order Status Donut Chart, and extended the backend `/api/dashboard/` endpoint with `revenue_history`, `order_status_breakdown`, and `low_stock_items` to feed these visualizations with real data.
 
 ## 22. Future Improvements
 1. **Automated Reorder Alerts:** Send email notifications when stock falls below the `reorder_level`.
@@ -426,7 +432,7 @@ The finalized application provides a reliable, secure, and user-friendly interfa
 6. **Role-based UI Rendering:** Hide UI elements completely based on the user's explicit role (Admin vs. Staff).
 
 ## 23. GitHub Repository
-Link: [https://github.com/placeholder/inventory-management-system]
+Link: [https://github.com/zkestroyer/casestudy](https://github.com/zkestroyer/casestudy)
 
 ## 24. Conclusion
 The Business Inventory & Order Management System successfully addresses the inefficiencies of manual tracking. By leveraging Django for a robust API and React for a dynamic frontend, the project delivers a scalable, maintainable, and secure solution. The careful database design ensures data integrity, while the modular architecture lays a strong foundation for future business growth and technological enhancement.

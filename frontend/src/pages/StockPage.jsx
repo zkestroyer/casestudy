@@ -16,12 +16,12 @@ const StockPage = () => {
   }, [filterLow]);
 
   const columns = [
-    { header: 'Product', field: 'name' },
-    { header: 'SKU', field: 'sku' },
-    { header: 'Category', render: row => row.category_name || row.category },
-    { header: 'Current Stock', field: 'stock_quantity' },
+    { header: 'Product', field: 'product_name' },
+    { header: 'SKU', field: 'product_sku' },
+    { header: 'Category', field: 'category_name' },
+    { header: 'Current Stock', field: 'quantity' },
     { header: 'Reorder Level', field: 'reorder_level' },
-    { header: 'Status', render: row => <StatusBadge status={row.stock_quantity <= row.reorder_level ? 'Low Stock' : 'In Stock'} /> }
+    { header: 'Status', render: row => <StatusBadge status={row.quantity <= row.reorder_level ? 'Low Stock' : 'In Stock'} /> }
   ];
 
   return (

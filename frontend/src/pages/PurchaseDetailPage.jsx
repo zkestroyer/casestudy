@@ -22,8 +22,8 @@ const PurchaseDetailPage = () => {
   const columns = [
     { header: 'Product', render: row => row.product_name || row.product },
     { header: 'Quantity', field: 'quantity' },
-    { header: 'Unit Price', field: 'unit_price' },
-    { header: 'Subtotal', render: row => (row.quantity * row.unit_price).toFixed(2) }
+    { header: 'Unit Cost', field: 'unit_cost' },
+    { header: 'Subtotal', field: 'subtotal' }
   ];
 
   return (
