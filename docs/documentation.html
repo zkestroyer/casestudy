@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Business Inventory & Order Management System Documentation</title>
+    <style>
+        /* Word Document Simulation CSS */
+        body { 
+            font-family: "Times New Roman", Times, serif; 
+            font-size: 12pt;
+            line-height: 1.5; 
+            color: #000; 
+            max-width: 850px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            text-align: justify;
+        }
+        h1, h2, h3, h4 { 
+            font-family: "Calibri", "Arial", sans-serif;
+            color: #000; 
+            margin-top: 1.5em; 
+            text-align: left;
+        }
+        h1 { font-size: 24pt; border-bottom: 2px solid #000; padding-bottom: 5px; page-break-before: always; }
+        h1:first-of-type { page-break-before: auto; } /* Don't break before the very first H1 */
+        h2 { font-size: 18pt; border-bottom: 1px solid #ccc; padding-bottom: 5px; page-break-after: avoid; }
+        h3 { font-size: 14pt; page-break-after: avoid; }
+        p, li { page-break-inside: avoid; }
+        
+        /* Title Page */
+        .title-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; 
+            text-align: center;
+            page-break-after: always;
+            padding-top: 20%;
+            box-sizing: border-box;
+        }
+        .title-page h1 {
+            font-family: "Calibri", "Arial", sans-serif;
+            font-size: 32pt;
+            border: none;
+            margin-bottom: 0.2em;
+            color: #2F5496;
+            text-align: center;
+            page-break-before: auto;
+        }
+        .title-page h2 {
+            font-family: "Calibri", "Arial", sans-serif;
+            font-size: 18pt;
+            border: none;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 2em;
+        }
+        .title-page .author {
+            font-size: 16pt;
+            font-weight: bold;
+            margin-top: 2em;
+        }
+        .title-page .date {
+            font-size: 14pt;
+            margin-top: 1em;
+            color: #555;
+        }
+
+        /* Tables & Code */
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin: 20px 0; 
+            font-size: 11pt; 
+            page-break-inside: avoid;
+            word-break: break-word;
+        }
+        table, th, td { border: 1px solid #000; }
+        th, td { padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        
+        code { 
+            background-color: #f4f4f4; 
+            padding: 2px 4px; 
+            font-family: "Courier New", Courier, monospace; 
+            font-size: 10.5pt; 
+        }
+        pre {
+            page-break-inside: avoid;
+        }
+        pre code { 
+            display: block; 
+            padding: 15px; 
+            overflow-x: auto; 
+            background-color: #f8f9fa; 
+            border: 1px solid #ccc; 
+            white-space: pre-wrap; /* Forces code to wrap instead of breaking page width */
+        }
+        
+        /* Mermaid specific fixes to prevent cutoff */
+        .mermaid { 
+            margin: 30px 0; 
+            display: flex; 
+            justify-content: center; 
+            page-break-inside: avoid;
+            width: 100%;
+            overflow: hidden;
+        }
+        .mermaid svg {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        /* Print Settings */
+        @media print {
+            body { 
+                max-width: 100%; 
+                padding: 0; 
+                background: #fff;
+            }
+            .title-page {
+                min-height: auto;
+                height: 100%;
+                display: block; /* Flexbox can act weird in some print renderers */
+                padding-top: 40%; 
+            }
+            @page { 
+                margin: 0.75in; /* Slightly smaller margins to give the ERD more room */
+            }
+            /* Hide URL printing on links if browser allows */
+            a[href]:after { content: none !important; }
+        }
+        
+        /* On-screen Print Button */
+        #print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background-color: #2F5496;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14pt;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        #print-btn:hover { background-color: #1a3668; }
+        @media print { #print-btn { display: none; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+    <button id="print-btn" onclick="window.print()">🖨️ Save as PDF</button>
+
+    <div class="title-page">
+        <h1>Business Inventory & Order Management System</h1>
+        <h2>System Architecture and Implementation Report</h2>
+        <div class="author">Submitted by: Zainab Khan</div>
+        <div class="date">August 2026</div>
+    </div>
+
+    <div id="content"></div>
+    
+    <script type="text/markdown" id="markdown-content">
+## 1. Introduction
+The Business Inventory & Order Management System is a comprehensive, centralized web application designed to streamline and automate core business operations. Its primary scope includes managing product inventory, tracking stock levels in real-time, facilitating purchase and sales order processing, and recording customer payments. The system provides role-based access to ensure data security and operational integrity.
+
+## 2. Case Study
+Small and medium-sized businesses frequently rely on manual methods or disjointed software to manage their inventory and sales. This traditional approach leads to significant challenges, including stock discrepancies, duplicate data entry, fulfillment delays, and a severe lack of operational visibility. Without a unified system, businesses struggle to scale, make informed decisions, and maintain customer satisfaction.
+
+## 3. Problem Statement
+Businesses need a centralized, reliable system for inventory and sales operations. The absence of such a system results in inefficient manual tracking, inability to prevent stockouts or overstocking, and a lack of real-time insights into business performance. A unified platform is necessary to integrate inventory control, order processing, and financial tracking.
+
+## 4. Objectives
+1. Analyze the core problems associated with manual inventory management.
+2. Identify the necessary entities and their relationships within the business domain.
+3. Design a robust and scalable relational database schema.
+4. Create a comprehensive Entity-Relationship Diagram (ERD).
+5. Implement the backend system using the Django framework.
+6. Build secure and efficient RESTful APIs using Django REST Framework.
+7. Develop a responsive and interactive user interface using React.
+8. Connect the React frontend seamlessly with the Django backend.
+9. Implement token-based authentication and role-based access control.
+10. Implement full CRUD (Create, Read, Update, Delete) operations for all core entities.
+11. Demonstrate complex database relationships effectively in the UI.
+12. Test the application thoroughly to ensure reliability.
+13. Document the system architecture, design decisions, and usage instructions.
+14. Maintain the project source code on a GitHub repository.
+
+## 5. Requirements
+### Functional Requirements
+- **Authentication:** Users must be able to log in securely. Role-based access (Admin/Staff) must be enforced.
+- **Product Management:** Ability to add, edit, view, and delete products, including SKU, pricing, and reorder levels.
+- **Category Management:** Group products into logical categories.
+- **Supplier Management:** Maintain a directory of suppliers with contact details.
+- **Customer Management:** Maintain a database of customers for sales tracking.
+- **Purchase Management:** Create purchase orders, add items, and track order status (Draft, Pending, Confirmed).
+- **Sales Order Management:** Create sales orders, allocate stock, and track order status.
+- **Payment Management:** Record payments against specific sales orders.
+- **Dashboard:** Provide an overview of stock levels, recent orders, and key metrics.
+
+### Non-functional Requirements
+- **Performance:** API responses should be fast and efficient under typical load.
+- **Security:** Secure API endpoints via token authentication. Protect against SQL injection and XSS.
+- **Usability:** The interface must be intuitive and require minimal training for staff.
+- **Responsiveness:** The UI must adapt to different screen sizes (desktop, tablet, mobile).
+- **Maintainability:** Code must be modular, well-documented, and follow standard design patterns.
+
+## 6. Users and Roles
+- **Administrator:** Full access to all system features. Can manage users, edit critical data, view all financial records, and configure system settings.
+- **Staff:** Limited access intended for day-to-day operations. Can create orders, manage inventory levels, and view basic reports, but may be restricted from administrative functions.
+
+## 7. Database Analysis
+
+### UserProfile
+- **Purpose:** Extends the default Django User model to add business-specific data.
+- **Attributes:** `id` (Auto), `user` (OneToOne), `role` (CharField), `phone` (CharField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `user_id` (references auth_user)
+- **Relationships:** 1:1 with User.
+- **Reason:** Keeps the auth system clean while storing additional app-specific user details.
+
+### Category
+- **Purpose:** Groups products into logical classifications for easy retrieval.
+- **Attributes:** `id` (Auto), `name` (CharField), `description` (TextField), `created_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** None
+- **Relationships:** 1:M with Product.
+- **Reason:** Essential for inventory organization and filtering.
+
+### Product
+- **Purpose:** Stores the catalog of items the business buys and sells.
+- **Attributes:** `id` (Auto), `category` (ForeignKey), `name` (CharField), `sku` (CharField), `description` (TextField), `price` (DecimalField), `cost_price` (DecimalField), `reorder_level` (IntegerField), `created_at` (DateTimeField), `updated_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `category_id` (references Category)
+- **Relationships:** M:1 with Category, 1:1 with Stock, 1:M with PurchaseItem, 1:M with OrderItem.
+- **Reason:** The core entity around which inventory and orders revolve.
+
+### Stock
+- **Purpose:** Tracks the current physical quantity of a product.
+- **Attributes:** `id` (Auto), `product` (OneToOne), `quantity` (IntegerField), `updated_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `product_id` (references Product)
+- **Relationships:** 1:1 with Product.
+- **Reason:** Separating stock from the product model allows for high-frequency updates without locking the main product record.
+
+### Supplier
+- **Purpose:** Stores details of vendors who provide products.
+- **Attributes:** `id` (Auto), `name` (CharField), `email` (EmailField), `phone` (CharField), `address` (TextField), `created_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** None
+- **Relationships:** 1:M with PurchaseOrder.
+- **Reason:** Necessary for generating purchase orders and tracking sourcing.
+
+### Customer
+- **Purpose:** Stores details of clients who purchase products.
+- **Attributes:** `id` (Auto), `name` (CharField), `email` (EmailField), `phone` (CharField), `address` (TextField), `created_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** None
+- **Relationships:** 1:M with SalesOrder.
+- **Reason:** Required for order tracking, invoicing, and relationship management.
+
+### PurchaseOrder
+- **Purpose:** Represents a formal request to buy products from a supplier.
+- **Attributes:** `id` (Auto), `supplier` (ForeignKey), `created_by` (ForeignKey), `order_date` (DateField), `status` (CharField), `total_amount` (DecimalField), `created_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `supplier_id` (references Supplier), `created_by_id` (references User)
+- **Relationships:** M:1 with Supplier, M:1 with User, 1:M with PurchaseItem.
+- **Reason:** Provides a vital audit trail for procurement.
+
+### PurchaseItem
+- **Purpose:** A junction table detailing specific products and quantities in a purchase order.
+- **Attributes:** `id` (Auto), `purchase_order` (ForeignKey), `product` (ForeignKey), `quantity` (IntegerField), `unit_cost` (DecimalField), `subtotal` (DecimalField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `purchase_order_id` (references PurchaseOrder), `product_id` (references Product).
+- **Relationships:** M:1 with PurchaseOrder, M:1 with Product.
+- **Reason:** Resolves the M:M relationship between POs and Products, holding line-item specific data.
+
+### SalesOrder
+- **Purpose:** Represents a customer's request to purchase goods.
+- **Attributes:** `id` (Auto), `customer` (ForeignKey), `created_by` (ForeignKey), `order_date` (DateField), `status` (CharField), `total_amount` (DecimalField), `created_at` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `customer_id` (references Customer), `created_by_id` (references User).
+- **Relationships:** M:1 with Customer, M:1 with User, 1:M with OrderItem, 1:M with Payment.
+- **Reason:** Essential for fulfillment, revenue tracking, and stock deduction.
+
+### OrderItem
+- **Purpose:** A junction table detailing specific products in a sales order.
+- **Attributes:** `id` (Auto), `sales_order` (ForeignKey), `product` (ForeignKey), `quantity` (IntegerField), `unit_price` (DecimalField), `subtotal` (DecimalField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `sales_order_id` (references SalesOrder), `product_id` (references Product).
+- **Relationships:** M:1 with SalesOrder, M:1 with Product.
+- **Reason:** Resolves the M:M relationship between SOs and Products, holding line-item specific data.
+
+### Payment
+- **Purpose:** Records financial transactions against sales orders.
+- **Attributes:** `id` (Auto), `sales_order` (ForeignKey), `amount` (DecimalField), `payment_method` (CharField), `status` (CharField), `payment_date` (DateTimeField).
+- **Primary Key:** `id`
+- **Foreign Keys:** `sales_order_id` (references SalesOrder).
+- **Relationships:** M:1 with SalesOrder.
+- **Reason:** Tracks revenue collection and order financial status.
+
+## 8. ERD
+```mermaid
+erDiagram
+    USER ||--|| USERPROFILE : has
+    USER ||--o{ PURCHASEORDER : "creates"
+    USER ||--o{ SALESORDER : "creates"
+    CATEGORY ||--o{ PRODUCT : "contains"
+    PRODUCT ||--|| STOCK : "has"
+    SUPPLIER ||--o{ PURCHASEORDER : "receives"
+    CUSTOMER ||--o{ SALESORDER : "places"
+    PURCHASEORDER ||--o{ PURCHASEITEM : "contains"
+    PRODUCT ||--o{ PURCHASEITEM : "included_in"
+    SALESORDER ||--o{ ORDERITEM : "contains"
+    PRODUCT ||--o{ ORDERITEM : "included_in"
+    SALESORDER ||--o{ PAYMENT : "receives"
+
+    USER {
+        int id PK
+        string username
+    }
+    USERPROFILE {
+        int id PK
+        int user_id FK
+        string role
+        string phone
+    }
+    CATEGORY {
+        int id PK
+        string name
+    }
+    PRODUCT {
+        int id PK
+        int category_id FK
+        string name
+        string sku
+        decimal price
+    }
+    STOCK {
+        int id PK
+        int product_id FK
+        int quantity
+    }
+    SUPPLIER {
+        int id PK
+        string name
+    }
+    CUSTOMER {
+        int id PK
+        string name
+    }
+    PURCHASEORDER {
+        int id PK
+        int supplier_id FK
+        int created_by_id FK
+        string status
+    }
+    PURCHASEITEM {
+        int id PK
+        int purchase_order_id FK
+        int product_id FK
+        int quantity
+    }
+    SALESORDER {
+        int id PK
+        int customer_id FK
+        int created_by_id FK
+        string status
+    }
+    ORDERITEM {
+        int id PK
+        int sales_order_id FK
+        int product_id FK
+        int quantity
+    }
+    PAYMENT {
+        int id PK
+        int sales_order_id FK
+        decimal amount
+    }
+```
+
+## 9. Relationship Explanation
+- **One-to-One (1:1):** 
+  - `User` ↔ `UserProfile`: Each user has exactly one profile extending their data.
+  - `Product` ↔ `Stock`: Each product has exactly one associated stock record representing its physical count.
+- **One-to-Many (1:M):**
+  - `Category` → `Products`: A category can hold many products, but a product belongs to one category.
+  - `Supplier` → `PurchaseOrders`: A supplier can receive many POs.
+  - `Customer` → `SalesOrders`: A customer can place many orders.
+  - `SalesOrder` → `Payments`: A single order might have multiple payment installments.
+- **Many-to-Many (M:M):**
+  - `PurchaseOrder` ↔ `Product`: Resolved via the `PurchaseItem` junction table.
+  - `SalesOrder` ↔ `Product`: Resolved via the `OrderItem` junction table.
+  - *Why junction tables are needed:* A standard M:M relationship only links IDs. Junction tables are required because each relationship instance carries extra, vital data—specifically, the `quantity` purchased/sold and the `price` at the time of the transaction.
+
+## 10. System Architecture
+```mermaid
+flowchart LR
+    subgraph Frontend
+        React[React App]
+        Axios[Axios HTTP Client]
+    end
+    subgraph Backend
+        API[Django REST API]
+        Models[Django Models]
+    end
+    DB[(SQLite Database)]
+
+    React -->|State & UI| Axios
+    Axios -->|HTTP/JSON Request| API
+    API -->|HTTP/JSON Response| Axios
+    API <-->|ORM| Models
+    Models <-->|SQL| DB
+```
+
+## 11. API Architecture
+The system uses RESTful (Representational State Transfer) architecture. Resources (Products, Orders, Users) are exposed as distinct URLs. Standard HTTP methods denote actions: `GET` (read), `POST` (create), `PUT/PATCH` (update), and `DELETE` (remove). Data is exchanged strictly in JSON format.
+
+**Token Authentication Flow:**
+1. Client sends credentials (username/password) to the login endpoint.
+2. Server verifies credentials and returns a secure cryptographic Token.
+3. Client stores the Token (e.g., in localStorage).
+4. For all subsequent requests, the client attaches the Token in the HTTP `Authorization` header (`Authorization: Token <token_string>`).
+5. Server validates the token before processing the request.
+
+## 12. API Endpoints
+| Method | URL | Description | Auth Requirement |
+|--------|-----|-------------|------------------|
+| POST | `/api/accounts/login/` | Authenticate user | None |
+| GET | `/api/inventory/categories/` | List categories | Token |
+| POST | `/api/inventory/categories/` | Create category | Token |
+| GET | `/api/inventory/products/` | List products | Token |
+| POST | `/api/inventory/products/` | Create product | Token |
+| GET | `/api/inventory/stock/` | View all stock | Token |
+| GET | `/api/orders/purchase/` | List purchase orders | Token |
+| POST | `/api/orders/purchase/` | Create purchase order | Token |
+| GET | `/api/orders/sales/` | List sales orders | Token |
+| POST | `/api/orders/sales/` | Create sales order | Token |
+| GET | `/api/orders/payments/` | List payments | Token |
+| POST | `/api/orders/payments/` | Create payment | Token |
+
+## 13. Application Flow
+
+### Login Flow
+```mermaid
+sequenceDiagram
+    participant User
+    participant React
+    participant Django
+    User->>React: Enters credentials
+    React->>Django: POST /login (JSON)
+    Django-->>React: Returns Token
+    React->>React: Save to LocalStorage
+    React->>User: Redirects to Dashboard
+```
+
+### Product Creation Flow
+```mermaid
+sequenceDiagram
+    participant Admin
+    participant React
+    participant Django
+    Admin->>React: Submits product form
+    React->>Django: POST /products (with Token)
+    Django->>Django: Validates Data
+    Django-->>React: 201 Created (JSON)
+    React->>Admin: Shows success message
+```
+
+### Sales Order Flow (with stock check)
+```mermaid
+flowchart TD
+    A[Create Sales Order] --> B{Check Stock Levels}
+    B -- Insufficient --> C[Show Error Message]
+    B -- Sufficient --> D[Save Sales Order]
+    D --> E[Save Order Items]
+    E --> F[Deduct from Stock]
+    F --> G[Complete Order]
+```
+
+### Purchase Confirmation Flow
+```mermaid
+flowchart TD
+    A[Draft Purchase Order] --> B[Mark as Confirmed]
+    B --> C[Update Order Status]
+    C --> D[Iterate Purchase Items]
+    D --> E[Add Quantity to Stock]
+    E --> F[Save Stock Updates]
+```
+
+## 14. State Diagram
+```mermaid
+stateDiagram-v2
+    direction LR
+    
+    state "Sales Order" as SO {
+        [*] --> Draft_SO
+        Draft_SO --> Pending_SO
+        Pending_SO --> Confirmed_SO
+        Pending_SO --> Cancelled_SO
+        Confirmed_SO --> Completed_SO
+        Cancelled_SO --> [*]
+        Completed_SO --> [*]
+    }
+    
+    state "Purchase Order" as PO {
+        [*] --> Draft_PO
+        Draft_PO --> Pending_PO
+        Pending_PO --> Confirmed_PO
+        Pending_PO --> Cancelled_PO
+        Confirmed_PO --> [*]
+        Cancelled_PO --> [*]
+    }
+```
+
+## 15. Django Backend
+The backend is structured into modular apps: `accounts`, `inventory`, and `orders`.
+- **Models:** Defined using Django ORM to represent DB tables (e.g., `inventory.models.Product`).
+- **Serializers:** Django REST Framework serializers translate complex Model instances into JSON and validate incoming data.
+- **Views:** ViewSets (e.g., `ModelViewSet`) are utilized to handle standard CRUD operations rapidly, keeping views clean and logic-focused.
+- **URLs:** App-level routing utilizes DRF Routers to automatically map URLs to ViewSet actions.
+- **Authentication/Permissions:** The system utilizes DRF's Token Authentication. Permission classes (`IsAuthenticated`) are applied globally or at the view level to secure endpoints.
+
+## 16. React Frontend
+The frontend uses a modern React architecture powered by Vite.
+- **Pages:** Top-level components (e.g., Dashboard, Products, SalesOrders) that represent routes.
+- **Components:** Reusable UI elements (Buttons, Tables, Modals, Forms).
+- **Routing:** Handled via React Router (`react-router-dom`), mapping URL paths to Pages.
+- **API Services:** A dedicated layer (often using Axios) abstracts HTTP calls, keeping components clean.
+- **State Management:** React hooks (`useState`, `useEffect`, `useContext`) handle local component state and global auth state.
+
+## 17. Integration
+React integrates with Django via HTTP requests over the network. 
+1. **Axios Instance:** An Axios instance is configured with a base URL pointing to the Django API.
+2. **Token Interceptor:** An Axios interceptor automatically attaches the authentication token (from localStorage) to the `Authorization` header of every outgoing request.
+3. **State Cycle:** Components trigger API calls (e.g., on mount via `useEffect` or on form submit). The response data updates React state, triggering a re-render of the UI with the fresh data from Django.
+
+## 18. Testing
+| Test ID | Feature | Input | Expected Result | Actual Result | Status |
+|---|---|---|---|---|---|
+| TC01 | Login | Valid user/pass | Returns 200 & Token | Returns 200 & Token | Pass |
+| TC02 | Login | Invalid password | Returns 401 | Returns 401 | Pass |
+| TC03 | Create Product | Valid payload | 201 Created & DB entry | 201 Created & DB entry | Pass |
+| TC04 | Create Product | Missing Name | 400 Bad Request | 400 Bad Request | Pass |
+| TC05 | View Stock | GET /stock/ | Returns list of stock | Returns list of stock | Pass |
+| TC06 | Create SO | Valid items | SO created, 201 | SO created, 201 | Pass |
+| TC07 | Stock Logic | SO Confirmed | Stock deducted | Stock deducted | Pass |
+| TC08 | Create PO | Valid PO | PO created, 201 | PO created, 201 | Pass |
+| TC09 | Stock Logic | PO Confirmed | Stock incremented | Stock incremented | Pass |
+| TC10 | Payments | Add Payment | Payment saved | Payment saved | Pass |
+| TC11 | Validation | Negative Qty | 400 Bad Request | 400 Bad Request | Pass |
+| TC12 | Auth | Access w/o Token | 401 Unauthorized | 401 Unauthorized | Pass |
+| TC13 | Delete Product | DELETE /products/1/ | 204 No Content | 204 No Content | Pass |
+| TC14 | Update Category | PUT payload | 200 OK & Updated | 200 OK & Updated | Pass |
+| TC15 | Logout | Clear Token | Session ends in UI | Session ends in UI | Pass |
+
+## 19. Screenshots
+Screenshots of the running application are included in the /screenshots directory.
+
+## 20. Results
+The finalized application provides a reliable, secure, and user-friendly interface for inventory management. The business can now successfully track products, generate complex purchase and sales orders, and monitor real-time stock levels, entirely eliminating the reliance on error-prone manual spreadsheets. The decoupled architecture ensures the backend API can be extended easily for future mobile applications.
+
+## 21. Challenges and Solutions
+1. **CORS Configuration:** 
+   - *Challenge:* Browser blocked React requests to Django. 
+   - *Solution:* Configured `django-cors-headers` to explicitly allow the React dev server origin.
+2. **Nested Serializer Creation:**
+   - *Challenge:* Creating an Order and its OrderItems in a single request was complex.
+   - *Solution:* Overrode the `create()` method in the Django Order serializer to handle nested item creation transactionally.
+3. **Stock Management Atomicity:**
+   - *Challenge:* Simultaneous orders could lead to race conditions and incorrect stock counts.
+   - *Solution:* Used Django's `F()` expressions and database transactions (`transaction.atomic`) to ensure stock updates are reliable.
+4. **Token Auth Integration:**
+   - *Challenge:* Managing token lifecycle securely in the React frontend.
+   - *Solution:* Used Axios interceptors to automatically append tokens and handle 401 responses gracefully by redirecting to login.
+5. **Responsive Design:**
+   - *Challenge:* Data-heavy tables were difficult to view on mobile devices.
+   - *Solution:* Implemented TailwindCSS responsive classes to convert tables to card-based layouts on smaller screens.
+
+## 22. Future Improvements
+1. **Automated Reorder Alerts:** Send email notifications when stock falls below the `reorder_level`.
+2. **Barcode Integration:** Allow camera-based barcode scanning for quick product lookup and order fulfillment.
+3. **Advanced Analytics:** Generate graphical reports for sales trends and profitability using libraries like Chart.js.
+4. **Multi-Warehouse Support:** Expand the database schema to track stock across different physical locations.
+5. **PDF Invoicing:** Generate downloadable PDF receipts and invoices for sales orders.
+6. **Role-based UI Rendering:** Hide UI elements completely based on the user's explicit role (Admin vs. Staff).
+
+## 23. GitHub Repository
+Link: [https://github.com/placeholder/inventory-management-system]
+
+## 24. Conclusion
+The Business Inventory & Order Management System successfully addresses the inefficiencies of manual tracking. By leveraging Django for a robust API and React for a dynamic frontend, the project delivers a scalable, maintainable, and secure solution. The careful database design ensures data integrity, while the modular architecture lays a strong foundation for future business growth and technological enhancement.
+</script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            mermaid.initialize({ 
+                startOnLoad: false, 
+                theme: 'default',
+                securityLevel: 'loose'
+            });
+            
+            const renderer = new marked.Renderer();
+            renderer.code = function(code) {
+                if (code.lang && code.lang.toLowerCase() === 'mermaid') {
+                    return '<div class="mermaid">' + code.text + '</div>';
+                }
+                return '<pre><code class="language-' + code.lang + '">' + code.text.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</code></pre>';
+            };
+            
+            marked.use({ renderer });
+            
+            const markdown = document.getElementById('markdown-content').textContent;
+            document.getElementById('content').innerHTML = marked.parse(markdown);
+            
+            setTimeout(() => {
+                mermaid.run({
+                    querySelector: '.mermaid'
+                }).then(() => {
+                    // Update print button text when ready
+                    const btn = document.getElementById('print-btn');
+                    btn.innerHTML = '🖨️ Save as PDF (Ready)';
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
