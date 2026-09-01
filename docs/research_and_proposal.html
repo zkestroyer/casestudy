@@ -1,0 +1,2247 @@
+<!DOCTYPE html><html><head><meta charset='utf-8'><title>OpsFlow R&D Proposal</title>
+<style>
+    body { font-family: 'Times New Roman', Times, serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 40px; color: #333; }
+    h1, h2, h3, h4 { color: #000; font-family: Arial, Helvetica, sans-serif; }
+    h1 { text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px; }
+    h2 { border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 0.9em; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; font-weight: bold; }
+    code { background-color: #f9f9f9; padding: 2px 4px; border: 1px solid #ccc; font-family: monospace; }
+    pre { background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; overflow: auto; }
+</style>
+</head><body><h1>OpsFlow — R&amp;D Process Document</h1>
+<h2>Digital Operations Management System for Small and Medium-Sized Businesses</h2>
+<hr />
+<p><strong>Prepared by:</strong> Zainab Khan
+<strong>Date:</strong> September 2026
+<strong>Version:</strong> 1.0
+<strong>GitHub Repository:</strong> https://github.com/zkestroyer/casestudy</p>
+<hr />
+<h2>Table of Contents</h2>
+<p><strong>Phase 1 — Problem &amp; Research</strong>
+1. Find and Understand the Problem
+2. Find the Relevant Researches
+3. Find the Relevant Existing Solutions
+4. Conclude Your Research in Table Form
+5. Suggest Solution and Discuss with Coordinator</p>
+<p><strong>Phase 2 — Proposal &amp; Planning</strong>
+6. Innovation Proposal
+7. Creative Overview
+8. Research and Feasibility Study
+9. Technology Road Map</p>
+<p><strong>Phase 3 — Proof of Concept</strong>
+10. Proof of Concept
+11. Final Combined Report</p>
+<p><strong>Phase 4 — Prototyping &amp; Experimentation</strong>
+12. Prototyping and Experimentation
+13. Prototyping and Experimentation Log</p>
+<p><strong>Phase 5 — Documentation &amp; Handover</strong>
+14. Complete Documentation &amp; Project Course Report
+15. Finalize the Project</p>
+<hr />
+<hr />
+<h1>PHASE 1 — PROBLEM &amp; RESEARCH</h1>
+<hr />
+<h2>1. Find and Understand the Problem</h2>
+<h3>1.1 Problem Statement</h3>
+<p>Small and medium-sized businesses (SMEs) manage purchasing, inventory, sales, and payment records through a fragmented collection of tools: spreadsheets, paper records, messaging applications, or disconnected software systems. This fragmented approach creates a cascade of operational problems:</p>
+<ul>
+<li><strong>Stock discrepancies</strong> between recorded and physical inventory</li>
+<li><strong>Duplicate data entry</strong> across multiple systems</li>
+<li><strong>Fulfilment delays</strong> from poor visibility into available stock</li>
+<li><strong>Lack of operational visibility</strong> for management decision-making</li>
+<li><strong>Stockouts</strong> from failure to reorder in time</li>
+<li><strong>Overstocking</strong> from poor demand visibility</li>
+<li><strong>Difficulty tracking transactions</strong> and reconciling payments</li>
+</ul>
+<h3>1.2 Affected Users</h3>
+<p>Business owners, operations managers, warehouse staff, purchasing officers, sales staff, and finance personnel in SMEs across retail, wholesale, distribution, and light manufacturing with 5–50 employees and $500K–$10M annual revenue.</p>
+<h3>1.3 Current Process (As-Is)</h3>
+<p>The typical SME manages operations through a combination of:
+1. Excel or Google Sheets for stock tracking
+2. Paper purchase orders and receiving documents
+3. Messaging apps (WhatsApp, email) for supplier and customer communication
+4. Separate accounting software (QuickBooks/Xero) for payments and invoicing
+5. Manual stock counts for reconciliation</p>
+<p><strong>Example Current Workflow (Purchasing):</strong>
+Staff notices low stock → Emails/WhatsApps supplier for quote → Creates purchase order in spreadsheet → Emails PO to supplier → Receives goods, checks against paper delivery note → Manually updates spreadsheet → Enters payment in accounting software → No automatic stock update or reorder alert.</p>
+<h3>1.4 Consequences / Business Impact</h3>
+<table>
+<thead>
+<tr>
+<th>Pain Point</th>
+<th>Description</th>
+<th>Business Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Duplication</td>
+<td>Same info entered into spreadsheets, POS, and accounting software</td>
+<td>Wasted staff time, increased error risk</td>
+</tr>
+<tr>
+<td>Stock Discrepancies</td>
+<td>Recorded stock differs from physical stock</td>
+<td>Lost sales (stockouts), excess capital tied up</td>
+</tr>
+<tr>
+<td>Delayed Updates</td>
+<td>Inventory changes not reflected in real-time</td>
+<td>Order fulfilment delays, customer dissatisfaction</td>
+</tr>
+<tr>
+<td>Manual Reconciliation</td>
+<td>Hours spent matching records across systems</td>
+<td>High labour costs, delayed decision-making</td>
+</tr>
+<tr>
+<td>Poor Visibility</td>
+<td>No real-time dashboard for operations</td>
+<td>Reactive rather than proactive management</td>
+</tr>
+<tr>
+<td>No Audit Trail</td>
+<td>Changes not tracked or attributed</td>
+<td>Accountability issues</td>
+</tr>
+<tr>
+<td>Payment Tracking</td>
+<td>No integrated view of outstanding payments</td>
+<td>Cash flow uncertainty</td>
+</tr>
+</tbody>
+</table>
+<h3>1.5 Frequency / Severity</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time spent on manual reconciliation</td>
+<td>5–10 hours/week per business</td>
+</tr>
+<tr>
+<td>Stock discrepancy rate</td>
+<td>5–15% of SKUs have record-physical mismatch</td>
+</tr>
+<tr>
+<td>Stockout frequency</td>
+<td>1–3 stockouts per month for typical SME</td>
+</tr>
+<tr>
+<td>Lost sales from stockouts</td>
+<td>5–15% of potential revenue</td>
+</tr>
+<tr>
+<td>Overstock carrying cost</td>
+<td>20–30% of inventory value annually</td>
+</tr>
+<tr>
+<td>Order fulfilment errors</td>
+<td>3–8% of orders</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>2. Find the Relevant Researches</h2>
+<h3>2.1 Academic &amp; Industry Research</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Research Title</th>
+<th>Source</th>
+<th>Year</th>
+<th>Key Finding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Micro-enterprise Inventory Methods Study</td>
+<td>Sharma et al.</td>
+<td>2025</td>
+<td>62.5% of micro-enterprises depend on manual inventory methods; medium enterprises significantly adopted EOQ (69.2%), JIT (55.0%), and cloud-based tools (61.8%)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UAE SMEs: Simple Tools Win</td>
+<td>SME10x</td>
+<td>2026</td>
+<td>64% of SMEs rely on spreadsheets for core operations; &gt;60% manage inventory outside main systems</td>
+</tr>
+<tr>
+<td>3</td>
+<td>SMB Application Adoption Plans</td>
+<td>Bredin</td>
+<td>2025</td>
+<td>Inventory management has the highest share of new adopters among small businesses</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Why SMBs Aren't Using AI for Inventory</td>
+<td>Cin7</td>
+<td>2025</td>
+<td>47% of SMBs not using automation want to; 41% not using AI are eager to upgrade</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Benefits of Inventory Management Systems</td>
+<td>Capterra</td>
+<td>2026</td>
+<td>49% switch tools because inefficiency slows daily work; 33% switch when basic tracking can't support growth; 56% say inventory tracking is critical</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Inventory Management Benchmark Report</td>
+<td>Netstock</td>
+<td>2025</td>
+<td>AI adoption among SMBs doubled in past year; 48% now using AI; 59% using automation</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Small Businesses Inventory Management Software Market</td>
+<td>Research and Markets</td>
+<td>2026</td>
+<td>Global market valued at $2.74B in 2025, projected $5.41B by 2032, CAGR 10.18%</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Barcode Inventory Management Software Market</td>
+<td>360iResearch</td>
+<td>2026</td>
+<td>Market at $1.28B in 2025, 11.50% CAGR; cloud-native, mobile-first, integration-led platforms trending</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Inventory Management Software Market Trends</td>
+<td>Mordor Intelligence</td>
+<td>2025</td>
+<td>SMEs are the fastest-growing segment at 13.12% CAGR</td>
+</tr>
+<tr>
+<td>10</td>
+<td>SME Inventory Management Penetration</td>
+<td>Suda Tianyao</td>
+<td>2026</td>
+<td>Overall penetration at 68.3%; &gt;70% in e-commerce/retail; 80% of MSMEs projected digitally equipped by 2027</td>
+</tr>
+</tbody>
+</table>
+<h3>2.2 Market Statistics Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Statistic</th>
+<th>Value</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Global SME Inventory Software Market (2025)</td>
+<td>$2.74 billion</td>
+<td>Research and Markets</td>
+</tr>
+<tr>
+<td>Projected Market (2032)</td>
+<td>$5.41 billion</td>
+<td>Research and Markets</td>
+</tr>
+<tr>
+<td>CAGR</td>
+<td>10.18%</td>
+<td>Research and Markets</td>
+</tr>
+<tr>
+<td>SME cloud adoption penetration</td>
+<td>68.3%</td>
+<td>Suda Tianyao</td>
+</tr>
+<tr>
+<td>SMEs on spreadsheets</td>
+<td>64%</td>
+<td>SME10x</td>
+</tr>
+<tr>
+<td>SMBs wanting automation</td>
+<td>47%</td>
+<td>Cin7</td>
+</tr>
+<tr>
+<td>Tool switching due to inefficiency</td>
+<td>49%</td>
+<td>Capterra</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Find the Relevant Existing Solutions</h2>
+<h3>3.1 Direct Competitor Solutions</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Solution</th>
+<th>Target Customer</th>
+<th>Key Features</th>
+<th>Pricing</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Zoho Inventory</strong></td>
+<td>SMB e-commerce sellers</td>
+<td>Multi-channel sales, real-time stock, shipping integrations, barcode scanning</td>
+<td>Free–$249/month</td>
+<td>Limited reporting, FIFO-only costing, UI not optimised for high volume</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Odoo Inventory</strong></td>
+<td>SMEs needing ERP</td>
+<td>Warehouse management, manufacturing, multi-location, FIFO/FEFO costing</td>
+<td>$31.10/user/month</td>
+<td>Complex setup, higher cost with multiple apps, requires technical resources</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Square</strong></td>
+<td>Retailers, restaurants</td>
+<td>POS integration, real-time stock, multi-location, inventory reporting</td>
+<td>Free–$149/location/month</td>
+<td>Limited purchasing functionality, inventory requires higher-tier plans</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>inFlow Inventory</strong></td>
+<td>B2B and wholesale</td>
+<td>B2B portal, inventory tracking, manufacturing</td>
+<td>$89–$1,055/month</td>
+<td>Expensive for small teams, complex interface</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Cin7</strong></td>
+<td>Multi-location businesses</td>
+<td>End-to-end inventory, automatic notifications, integrations</td>
+<td>From $295/month</td>
+<td>Very expensive, overkill for small SMEs</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Sortly</strong></td>
+<td>Small businesses</td>
+<td>Inventory tracking, asset tracking, barcode/QR scanning</td>
+<td>From $24/month</td>
+<td>Very basic, no purchasing or sales order workflows</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 Indirect Alternatives</h3>
+<table>
+<thead>
+<tr>
+<th>Alternative</th>
+<th>Usage</th>
+<th>Limitations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Spreadsheets (Excel/Google Sheets)</strong></td>
+<td>Primary tracking tool for 64% of SMEs</td>
+<td>No real-time updates, error-prone, no automation, no audit trail</td>
+</tr>
+<tr>
+<td><strong>Paper Records</strong></td>
+<td>Purchase orders, receiving documents</td>
+<td>No searchability, loss risk, manual reconciliation</td>
+</tr>
+<tr>
+<td><strong>Accounting Software (QuickBooks/Xero)</strong></td>
+<td>Invoicing, payments</td>
+<td>Limited inventory, no purchasing workflows</td>
+</tr>
+<tr>
+<td><strong>Manual Processes</strong></td>
+<td>Stock counts, order management</td>
+<td>Time-consuming, inaccurate, unscalable</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>4. Conclude Your Research in Table Form</h2>
+<h3>Research Conclusion Table</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Name</th>
+<th>Link / Source</th>
+<th>Description</th>
+<th>Technology / Technique</th>
+<th>Achievement</th>
+<th>Challenges</th>
+<th>Localities</th>
+<th>Alternative Approaches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Zoho Inventory</strong></td>
+<td>zoho.com/inventory</td>
+<td>Cloud-based multi-channel inventory management for SMB e-commerce sellers</td>
+<td>Cloud SaaS, REST APIs, multi-warehouse architecture</td>
+<td>Market leader in SMB segment, wide integrations with 40+ shipping carriers</td>
+<td>Limited reporting capabilities, FIFO-only costing, UI struggles at high volume</td>
+<td>Global (India-based, serving worldwide)</td>
+<td>Zoho One suite for full business stack</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Odoo Inventory</strong></td>
+<td>odoo.com</td>
+<td>Open-source ERP with comprehensive inventory, manufacturing, and warehouse modules</td>
+<td>Python, PostgreSQL, modular ERP architecture, FIFO/FEFO/AVCO costing</td>
+<td>Complete business suite, strong manufacturing support, flexible customisation</td>
+<td>Complex initial setup, cost escalates with multiple apps, requires technical staff</td>
+<td>Global (Belgium-based, worldwide deployment)</td>
+<td>Community edition (free) vs Enterprise</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Square</strong></td>
+<td>squareup.com</td>
+<td>POS-centric platform with integrated inventory for retail and restaurants</td>
+<td>Cloud SaaS, POS hardware integration, real-time sync</td>
+<td>Seamless POS-to-inventory connection, excellent for retail point-of-sale</td>
+<td>Limited purchasing/procurement, advanced features locked behind premium tiers</td>
+<td>US, UK, Canada, Australia, Japan</td>
+<td>Shopify POS for e-commerce-first businesses</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>inFlow Inventory</strong></td>
+<td>inflowinventory.com</td>
+<td>B2B-focused inventory management with wholesale portal and manufacturing</td>
+<td>Cloud + On-premise options, B2B portal, barcode support</td>
+<td>Strong B2B features, showroom for wholesale ordering</td>
+<td>Expensive ($89–$1,055/month), complex interface for small teams</td>
+<td>US, Canada (primarily North America)</td>
+<td>QuickBooks Commerce, TradeGecko</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>Cin7</strong></td>
+<td>cin7.com</td>
+<td>Enterprise-grade connected inventory platform for multi-location operations</td>
+<td>Cloud SaaS, 700+ integrations, EDI support, advanced analytics</td>
+<td>Comprehensive feature set, strong for complex multi-channel businesses</td>
+<td>Very expensive (from $295/month), overkill for small SMEs, steep learning curve</td>
+<td>Global (New Zealand-based, worldwide)</td>
+<td>NetSuite, SAP Business One</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Sortly</strong></td>
+<td>sortly.com</td>
+<td>Simple visual inventory tracking with barcode/QR scanning for small teams</td>
+<td>Cloud SaaS, mobile-first, image-based tracking</td>
+<td>Very easy to use, good for asset tracking, affordable starting point</td>
+<td>Very basic — no purchasing, no sales orders, no financial tracking</td>
+<td>US (primarily)</td>
+<td>Inventory Now, BoxHero</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>Spreadsheet-based tracking</strong></td>
+<td>Excel / Google Sheets</td>
+<td>Manual inventory tracking using formulae and templates</td>
+<td>Spreadsheet software, manual data entry</td>
+<td>Familiar, zero cost, immediate availability</td>
+<td>No real-time updates, error-prone, version conflicts, no automation, no audit trail</td>
+<td>Universal</td>
+<td>Airtable for structured spreadsheet alternative</td>
+</tr>
+</tbody>
+</table>
+<h3>Research Gap Identification</h3>
+<p>Based on the research conclusion, the following critical gaps exist:</p>
+<ol>
+<li>
+<p><strong>The "Spreadsheet to Software" Bridge:</strong> 64% of SMEs on spreadsheets but existing solutions are either too basic (Sortly) or too complex/expensive (Odoo, Cin7). No solution specifically targets the transition from spreadsheets to structured operations.</p>
+</li>
+<li>
+<p><strong>Integrated Operations vs. Siloed Inventory:</strong> Most competitors focus on inventory tracking alone. None provide an affordable, integrated solution covering purchasing → receiving → inventory → sales → payment in a single platform at the SME price point.</p>
+</li>
+<li>
+<p><strong>Affordable Entry Point:</strong> Solutions like Cin7 ($295+/month) and inFlow ($89+/month) are out of reach for SMEs with 5–50 employees. A $39/month entry point with full operational coverage is absent from the market.</p>
+</li>
+<li>
+<p><strong>Practical Automation for Non-Technical Users:</strong> While AI/automation is trending, most solutions offer complex features that SMEs don't need. Practical, configurable automation (low-stock alerts, payment reminders) without complexity is underserved.</p>
+</li>
+<li>
+<p><strong>Web-First Responsive Design:</strong> Many competitors require separate mobile apps or have poor responsive design. A single responsive web interface that works on desktop, tablet, and phone is a differentiator.</p>
+</li>
+</ol>
+<hr />
+<h2>5. Suggest Solution and Discuss with Coordinator</h2>
+<h3>5.1 Proposed Solution: OpsFlow</h3>
+<p><strong>Product Name:</strong> OpsFlow
+<strong>Tagline:</strong> <em>Connected operations for growing businesses — inventory, purchasing, sales, and payments in one place.</em></p>
+<p><strong>One-Sentence Value Proposition:</strong> OpsFlow replaces fragmented spreadsheets and disconnected tools with a unified, web-based operations platform that gives SMEs real-time visibility into inventory, purchasing, sales, and payments.</p>
+<h3>5.2 How OpsFlow Fills the Gap</h3>
+<table>
+<thead>
+<tr>
+<th>Research Gap</th>
+<th>OpsFlow Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spreadsheet-to-Software bridge</td>
+<td>Simple onboarding, familiar UI paradigm, affordable pricing</td>
+</tr>
+<tr>
+<td>Integrated operations</td>
+<td>Full cycle: Purchasing → Inventory → Sales → Payments in one platform</td>
+</tr>
+<tr>
+<td>Affordable entry</td>
+<td>$39/month starting price, no per-user pricing on basic plan</td>
+</tr>
+<tr>
+<td>Practical automation</td>
+<td>Low-stock alerts, automatic stock updates on order confirmation</td>
+</tr>
+<tr>
+<td>Web-first responsive</td>
+<td>Single responsive React interface for all devices</td>
+</tr>
+</tbody>
+</table>
+<h3>5.3 Core Capabilities</h3>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>How It Solves the Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Centralised Inventory</td>
+<td>Single source of truth for all stock; real-time updates via Stock model</td>
+</tr>
+<tr>
+<td>Purchase Order Management</td>
+<td>End-to-end procurement from request to receipt; supplier history</td>
+</tr>
+<tr>
+<td>Sales Order Processing</td>
+<td>Order creation → availability check → stock deduction → payment tracking</td>
+</tr>
+<tr>
+<td>Payment Reconciliation</td>
+<td>Integrated view of outstanding payments and transaction history</td>
+</tr>
+<tr>
+<td>Operational Dashboard</td>
+<td>Real-time KPIs, revenue charts, order status breakdowns, low-stock alerts</td>
+</tr>
+<tr>
+<td>Automated Stock Management</td>
+<td>Stock atomically increases on PO confirmation, decreases on SO confirmation</td>
+</tr>
+<tr>
+<td>Responsive Web Access</td>
+<td>Full functionality on any device — desktop, tablet, or smartphone</td>
+</tr>
+<tr>
+<td>Audit Trail</td>
+<td>Complete history of all changes with user attribution</td>
+</tr>
+</tbody>
+</table>
+<h3>5.4 Target Users</h3>
+<table>
+<thead>
+<tr>
+<th>Persona</th>
+<th>Role</th>
+<th>Primary Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Operations Manager</td>
+<td>Decision-maker, daily user</td>
+<td>Real-time inventory visibility, PO management, reporting</td>
+</tr>
+<tr>
+<td>Warehouse Staff</td>
+<td>End user</td>
+<td>Stock receiving, cycle counting via web/tablet</td>
+</tr>
+<tr>
+<td>Sales Staff</td>
+<td>End user</td>
+<td>Stock availability checks, sales order creation</td>
+</tr>
+<tr>
+<td>Business Owner</td>
+<td>Buyer/decision-maker</td>
+<td>Operational visibility, profitability insights</td>
+</tr>
+<tr>
+<td>Finance/Accounting</td>
+<td>End user</td>
+<td>Payment reconciliation, transaction history</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h1>PHASE 2 — PROPOSAL &amp; PLANNING</h1>
+<hr />
+<h2>6. Innovation Proposal</h2>
+<h3>6.1 Problem Summary</h3>
+<p>SMEs managing operations through fragmented tools (spreadsheets, paper, messaging apps) suffer from stock discrepancies, duplicate data entry, fulfilment delays, and poor visibility. The market lacks an affordable, integrated, easy-to-adopt solution that bridges the gap between basic spreadsheets and complex enterprise ERP.</p>
+<h3>6.2 Proposed Innovation</h3>
+<p>A <strong>cloud-native, web-based operations management platform</strong> built with Django REST Framework (backend) and React (frontend) that provides:</p>
+<ol>
+<li><strong>Unified operations</strong> — purchasing, sales, inventory, and payments in one platform</li>
+<li><strong>Automatic stock management</strong> — atomic stock updates triggered by order confirmations</li>
+<li><strong>Real-time dashboard</strong> — KPI cards, revenue trends, order status charts, low-stock alerts</li>
+<li><strong>Affordable pricing</strong> — $39/month entry point, significantly below competitors</li>
+<li><strong>Web-first responsive design</strong> — single interface for all devices, no separate mobile app</li>
+</ol>
+<h3>6.3 Innovation Differentiation</h3>
+<table>
+<thead>
+<tr>
+<th>vs. Current State</th>
+<th>OpsFlow Innovation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spreadsheets with manual entry</td>
+<td>Real-time, automated stock tracking</td>
+</tr>
+<tr>
+<td>Separate tools for PO/SO/payments</td>
+<td>Single integrated platform</td>
+</tr>
+<tr>
+<td>No stock alerts</td>
+<td>Automatic low-stock detection and dashboard alerts</td>
+</tr>
+<tr>
+<td>Manual reconciliation (5–10 hrs/week)</td>
+<td>Automated transaction tracking</td>
+</tr>
+<tr>
+<td>No data visualisation</td>
+<td>Interactive charts (revenue trends, order breakdown)</td>
+</tr>
+<tr>
+<td>Error-prone manual calculations</td>
+<td>Auto-calculated subtotals, atomic transactions</td>
+</tr>
+</tbody>
+</table>
+<h3>6.4 Functional Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Secure login with Token-based authentication</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Full CRUD for Products with SKU, price, cost_price, reorder_level</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>Full CRUD for Categories</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Full CRUD for Suppliers</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>Full CRUD for Customers</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Create Purchase Orders with nested line items (product, quantity, unit_cost)</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-07</td>
+<td>Confirm Purchase Orders to atomically increase stock quantities</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-08</td>
+<td>Create Sales Orders with nested line items (product, quantity, unit_price)</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-09</td>
+<td>Confirm Sales Orders with stock validation and atomic deduction</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-10</td>
+<td>Record Payments against Sales Orders with method tracking</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-11</td>
+<td>Dashboard with KPIs, revenue chart, order breakdown, low-stock table</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-12</td>
+<td>Stock level viewing with reorder level comparison</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-13</td>
+<td>Auto-create Stock record on Product creation (Django signal)</td>
+<td>Must-have</td>
+</tr>
+<tr>
+<td>FR-14</td>
+<td>Auto-create UserProfile on User creation (Django signal)</td>
+<td>Must-have</td>
+</tr>
+</tbody>
+</table>
+<h3>6.5 Non-Functional Requirements</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Specification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-01</td>
+<td>Performance</td>
+<td>API responses &lt; 500ms</td>
+</tr>
+<tr>
+<td>NFR-02</td>
+<td>Security</td>
+<td>Token authentication, CORS, HTTPS-ready</td>
+</tr>
+<tr>
+<td>NFR-03</td>
+<td>Data Integrity</td>
+<td><code>transaction.atomic()</code> for stock operations</td>
+</tr>
+<tr>
+<td>NFR-04</td>
+<td>Usability</td>
+<td>Professional UI, minimal training required</td>
+</tr>
+<tr>
+<td>NFR-05</td>
+<td>Responsiveness</td>
+<td>Desktop (1024px+), Tablet (768px), Mobile (480px)</td>
+</tr>
+<tr>
+<td>NFR-06</td>
+<td>Maintainability</td>
+<td>Modular Django apps, reusable React components</td>
+</tr>
+<tr>
+<td>NFR-07</td>
+<td>Scalability</td>
+<td>Decoupled architecture supports horizontal scaling</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>7. Creative Overview</h2>
+<h3>7.1 Product Vision</h3>
+<p><strong>"OpsFlow: The operations platform that grows with your business — from spreadsheets to seamless."</strong></p>
+<h3>7.2 Design Philosophy</h3>
+<ul>
+<li><strong>Professional, not flashy:</strong> Dark navy sidebar, clean typography (Inter font), muted colour palette</li>
+<li><strong>Functional, not decorative:</strong> Every UI element serves a purpose</li>
+<li><strong>Data-forward:</strong> Dashboard-first approach with KPI cards, charts, and alerts</li>
+<li><strong>Consistent:</strong> Reusable component library (DataTable, FormInput, Modal, StatusBadge)</li>
+</ul>
+<h3>7.3 User Interface Design</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Design Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Sidebar Navigation</strong></td>
+<td>Fixed dark navy (#0f172a) sidebar</td>
+<td>Always-visible navigation for quick context switching</td>
+</tr>
+<tr>
+<td><strong>KPI Cards</strong></td>
+<td>Grid of 4 metric cards on Dashboard</td>
+<td>Immediate operational pulse at a glance</td>
+</tr>
+<tr>
+<td><strong>Revenue Chart</strong></td>
+<td>Line chart (Recharts)</td>
+<td>Shows revenue trends over time</td>
+</tr>
+<tr>
+<td><strong>Order Status</strong></td>
+<td>Donut/Pie chart</td>
+<td>Quick visual breakdown of order states</td>
+</tr>
+<tr>
+<td><strong>Data Tables</strong></td>
+<td>Zebra-striped, sortable</td>
+<td>Clean data presentation for all entities</td>
+</tr>
+<tr>
+<td><strong>Status Badges</strong></td>
+<td>Colour-coded pills</td>
+<td>Instant visual status recognition</td>
+</tr>
+<tr>
+<td><strong>Empty States</strong></td>
+<td>Illustrated placeholder</td>
+<td>Guides users when no data exists</td>
+</tr>
+</tbody>
+</table>
+<h3>7.4 Unique Value Proposition</h3>
+<table>
+<thead>
+<tr>
+<th>Value Element</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unified Operations</td>
+<td>One platform for inventory, purchasing, sales, and payments</td>
+</tr>
+<tr>
+<td>Simple to Start</td>
+<td>Easy onboarding, familiar patterns for spreadsheet users</td>
+</tr>
+<tr>
+<td>Affordable Growth</td>
+<td>$39/month entry, transparent scaling</td>
+</tr>
+<tr>
+<td>Web-First Responsive</td>
+<td>Full functionality on any device without a mobile app</td>
+</tr>
+<tr>
+<td>Practical Automation</td>
+<td>Automated alerts and stock updates without complexity</td>
+</tr>
+<tr>
+<td>Real-Time Visibility</td>
+<td>Always-accurate stock levels and operational dashboards</td>
+</tr>
+<tr>
+<td>Built for SMEs</td>
+<td>Designed for 5–50 employee businesses, not enterprise overkill</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>8. Research and Feasibility Study</h2>
+<h3>8.1 Technical Feasibility</h3>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Readiness</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Django REST Framework</td>
+<td>✅ Ready</td>
+<td>Fully functional API with authentication, permissions, ViewSets</td>
+</tr>
+<tr>
+<td>React + Vite</td>
+<td>✅ Ready</td>
+<td>Complete responsive frontend with routing, state management, charts</td>
+</tr>
+<tr>
+<td>SQLite → PostgreSQL</td>
+<td>✅ Ready</td>
+<td>SQLite for development; PostgreSQL for production (drop-in replacement)</td>
+</tr>
+<tr>
+<td>Token Authentication</td>
+<td>✅ Ready</td>
+<td>Implemented and tested in prototype</td>
+</tr>
+<tr>
+<td>Atomic Transactions</td>
+<td>✅ Ready</td>
+<td><code>transaction.atomic()</code> implemented for stock operations</td>
+</tr>
+</tbody>
+</table>
+<h3>8.2 Market Feasibility</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Assessment</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Problem</td>
+<td>✅ Real</td>
+<td>64% of SMEs on spreadsheets; 49% switch tools due to inefficiency</td>
+</tr>
+<tr>
+<td>Market Size</td>
+<td>✅ Large</td>
+<td>$2.74B market growing at 10.18% CAGR</td>
+</tr>
+<tr>
+<td>Customer</td>
+<td>✅ Defined</td>
+<td>SMEs with 5–50 employees in retail/wholesale/distribution</td>
+</tr>
+<tr>
+<td>Competition</td>
+<td>✅ Manageable</td>
+<td>Clear gap between expensive ERP and basic tools</td>
+</tr>
+<tr>
+<td>Willingness to Pay</td>
+<td>✅ Validated</td>
+<td>SMEs willing to pay $30–$100/month</td>
+</tr>
+</tbody>
+</table>
+<h3>8.3 Financial Feasibility</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monthly infrastructure cost</td>
+<td>$261</td>
+</tr>
+<tr>
+<td>Average revenue per user</td>
+<td>$39/month</td>
+</tr>
+<tr>
+<td>Break-even subscribers</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Year 1 target</td>
+<td>350 subscribers ($163,800 ARR)</td>
+</tr>
+<tr>
+<td>Year 3 target</td>
+<td>3,500 subscribers ($1,638,000 ARR)</td>
+</tr>
+<tr>
+<td>Gross margin</td>
+<td>&gt;80%</td>
+</tr>
+</tbody>
+</table>
+<h3>8.4 Risk Assessment</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Impact</th>
+<th>Probability</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strong competition</td>
+<td>High</td>
+<td>Medium</td>
+<td>Focus on underserved segment; simplicity and price</td>
+</tr>
+<tr>
+<td>Migration difficulty</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>CSV import templates; guided onboarding</td>
+</tr>
+<tr>
+<td>Employee resistance</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Simple UX; role-specific views; training</td>
+</tr>
+<tr>
+<td>Data security risk</td>
+<td>High</td>
+<td>Low</td>
+<td>Authentication; encryption; backups; audit trail</td>
+</tr>
+<tr>
+<td>Over-scoping</td>
+<td>High</td>
+<td>High</td>
+<td>Strict MVP; phased feature rollout</td>
+</tr>
+<tr>
+<td>Technical debt</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Code reviews; testing; modular architecture</td>
+</tr>
+</tbody>
+</table>
+<h3>8.5 Feasibility Conclusion</h3>
+<p><strong>The project is technically feasible, commercially viable, and addresses a genuine market need.</strong> The Django/React technology stack is proven, the market is growing at 10.18% CAGR, and break-even is achievable with just 7 subscribers.</p>
+<hr />
+<h2>9. Technology Road Map</h2>
+<h3>9.1 Technology Stack</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend</td>
+<td>React 18 + Vite</td>
+<td>Component-based architecture, fast build tool, large ecosystem</td>
+</tr>
+<tr>
+<td>Styling</td>
+<td>Custom CSS Design System</td>
+<td>Professional, consistent styling without framework lock-in</td>
+</tr>
+<tr>
+<td>Charts</td>
+<td>Recharts</td>
+<td>React-native charting for dashboard visualisations</td>
+</tr>
+<tr>
+<td>Icons</td>
+<td>Lucide React</td>
+<td>Clean, professional SVG icon set</td>
+</tr>
+<tr>
+<td>Routing</td>
+<td>React Router DOM</td>
+<td>Client-side SPA routing</td>
+</tr>
+<tr>
+<td>HTTP Client</td>
+<td>Axios</td>
+<td>Interceptors for automatic token attachment</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Django 5 (Python)</td>
+<td>Rapid development, ORM, admin interface, security</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Django REST Framework</td>
+<td>REST API, serialisation, authentication, browsable API</td>
+</tr>
+<tr>
+<td>Authentication</td>
+<td>Token Authentication</td>
+<td>Stateless, scalable, simple to implement</td>
+</tr>
+<tr>
+<td>Database (Dev)</td>
+<td>SQLite</td>
+<td>Zero-config for development</td>
+</tr>
+<tr>
+<td>Database (Prod)</td>
+<td>PostgreSQL</td>
+<td>ACID compliance, JSON support, scaling</td>
+</tr>
+<tr>
+<td>Version Control</td>
+<td>Git + GitHub</td>
+<td>Collaboration, CI/CD, code review</td>
+</tr>
+</tbody>
+</table>
+<h3>9.2 System Architecture</h3>
+<pre><code class="language-mermaid">flowchart TB
+    subgraph Client[&quot;Client Layer&quot;]
+        Browser[&quot;React Web App&lt;br/&gt;(Vite + React Router)&quot;]
+    end
+
+    subgraph API[&quot;API Layer — Django REST Framework&quot;]
+        Auth[&quot;Token Auth&quot;]
+        Products[&quot;Products API&quot;]
+        Orders[&quot;Orders API&quot;]
+        Payments[&quot;Payments API&quot;]
+        Dashboard[&quot;Dashboard API&quot;]
+    end
+
+    subgraph Business[&quot;Business Logic Layer — Django&quot;]
+        Signals[&quot;Signals&lt;br/&gt;(Auto-create Stock/Profile)&quot;]
+        Atomic[&quot;Atomic Transactions&lt;br/&gt;(Stock Management)&quot;]
+        Perms[&quot;Permission Enforcement&quot;]
+    end
+
+    subgraph Data[&quot;Data Layer&quot;]
+        DB[&quot;SQLite / PostgreSQL&quot;]
+    end
+
+    Browser --&gt;|&quot;HTTP/JSON + Auth Token&quot;| API
+    API --&gt; Business
+    Business --&gt; Data
+</code></pre>
+<h3>9.3 Database Design — ERD</h3>
+<pre><code class="language-mermaid">erDiagram
+    USER ||--|| USERPROFILE : has
+    USER ||--o{ PURCHASEORDER : creates
+    USER ||--o{ SALESORDER : creates
+    CATEGORY ||--o{ PRODUCT : contains
+    PRODUCT ||--|| STOCK : has
+    SUPPLIER ||--o{ PURCHASEORDER : receives
+    CUSTOMER ||--o{ SALESORDER : places
+    PURCHASEORDER ||--o{ PURCHASEITEM : contains
+    PRODUCT ||--o{ PURCHASEITEM : included_in
+    SALESORDER ||--o{ ORDERITEM : contains
+    PRODUCT ||--o{ ORDERITEM : included_in
+    SALESORDER ||--o{ PAYMENT : receives
+
+    USER {
+        int id PK
+        string username
+        string email
+        string password_hash
+    }
+    USERPROFILE {
+        int id PK
+        int user_id FK
+        string role
+        string phone
+    }
+    CATEGORY {
+        int id PK
+        string name
+        text description
+        datetime created_at
+    }
+    PRODUCT {
+        int id PK
+        int category_id FK
+        string name
+        string sku UK
+        decimal price
+        decimal cost_price
+        int reorder_level
+    }
+    STOCK {
+        int id PK
+        int product_id FK
+        int quantity
+        datetime updated_at
+    }
+    SUPPLIER {
+        int id PK
+        string name
+        string email
+        string phone
+        text address
+    }
+    CUSTOMER {
+        int id PK
+        string name
+        string email
+        string phone
+        text address
+    }
+    PURCHASEORDER {
+        int id PK
+        int supplier_id FK
+        int created_by_id FK
+        date order_date
+        string status
+        decimal total_amount
+    }
+    PURCHASEITEM {
+        int id PK
+        int purchase_order_id FK
+        int product_id FK
+        int quantity
+        decimal unit_cost
+        decimal subtotal
+    }
+    SALESORDER {
+        int id PK
+        int customer_id FK
+        int created_by_id FK
+        date order_date
+        string status
+        decimal total_amount
+    }
+    ORDERITEM {
+        int id PK
+        int sales_order_id FK
+        int product_id FK
+        int quantity
+        decimal unit_price
+        decimal subtotal
+    }
+    PAYMENT {
+        int id PK
+        int sales_order_id FK
+        decimal amount
+        string payment_method
+        string status
+        datetime payment_date
+    }
+</code></pre>
+<h3>9.4 Database Normalisation</h3>
+<p>The database schema follows <strong>Third Normal Form (3NF)</strong>:</p>
+<p><strong>1NF:</strong> All tables have atomic values. No repeating groups. Each row uniquely identified by PK.</p>
+<p><strong>2NF:</strong> All non-key attributes fully depend on the primary key. No partial dependencies (all PKs are single-column auto-increment IDs).</p>
+<p><strong>3NF:</strong> No transitive dependencies. Category data is in a separate table (not duplicated on Product). Stock quantity is in a separate table (enabling frequent updates without locking Product records). Subtotal on PurchaseItem/OrderItem is stored for historical accuracy — the price at time of order is preserved even if the product price later changes.</p>
+<h3>9.5 Relationship Explanation</h3>
+<p><strong>One-to-One (1:1):</strong>
+- <code>User</code> ↔ <code>UserProfile</code>: Each user has exactly one profile. OneToOneField was chosen over extending AbstractUser because it keeps the Django auth system untouched.
+- <code>Product</code> ↔ <code>Stock</code>: Separated for high-frequency quantity updates without locking the Product row.</p>
+<p><strong>One-to-Many (1:M):</strong>
+- <code>Category</code> → <code>Products</code>: One category contains many products.
+- <code>Supplier</code> → <code>PurchaseOrders</code>: One supplier receives many POs.
+- <code>Customer</code> → <code>SalesOrders</code>: One customer places many orders.
+- <code>SalesOrder</code> → <code>Payments</code>: One order can have multiple payment installments.</p>
+<p><strong>Many-to-Many (M:M via Junction Tables):</strong>
+- <code>PurchaseOrder</code> ↔ <code>Product</code> via <code>PurchaseItem</code>: Carries quantity, unit_cost, subtotal.
+- <code>SalesOrder</code> ↔ <code>Product</code> via <code>OrderItem</code>: Carries quantity, unit_price, subtotal.
+- <em>Why junction tables instead of Django's ManyToManyField:</em> The relationship carries additional data (quantity, price at time of transaction) which a standard M:M pivot table cannot store.</p>
+<h3>9.6 API Architecture</h3>
+<p><strong>Authentication Flow:</strong></p>
+<pre><code class="language-mermaid">sequenceDiagram
+    participant Client as React Frontend
+    participant API as Django REST API
+    participant DB as Database
+
+    Client-&gt;&gt;API: POST /api/auth/login/ {username, password}
+    API-&gt;&gt;DB: Verify credentials
+    DB--&gt;&gt;API: User record
+    API--&gt;&gt;Client: 200 OK {token, user}
+    Note over Client: Stores token in localStorage
+    Client-&gt;&gt;API: GET /api/products/ (Authorization: Token xxx)
+    API-&gt;&gt;API: Validate token
+    API-&gt;&gt;DB: Query products
+    DB--&gt;&gt;API: Product list
+    API--&gt;&gt;Client: 200 OK [products]
+</code></pre>
+<p><strong>Complete API Endpoint Table:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>URL</th>
+<th>Description</th>
+<th>Auth</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>POST</td>
+<td><code>/api/auth/login/</code></td>
+<td>Authenticate user, return token</td>
+<td>No</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/auth/me/</code></td>
+<td>Get current user info</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/auth/logout/</code></td>
+<td>Invalidate token</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/categories/</code></td>
+<td>List / Create categories</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/api/categories/{id}/</code></td>
+<td>Retrieve / Update / Delete</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/products/</code></td>
+<td>List / Create products</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/api/products/{id}/</code></td>
+<td>Retrieve / Update / Delete</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/suppliers/</code></td>
+<td>List / Create suppliers</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/api/suppliers/{id}/</code></td>
+<td>Retrieve / Update / Delete</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/customers/</code></td>
+<td>List / Create customers</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/api/customers/{id}/</code></td>
+<td>Retrieve / Update / Delete</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/stock/</code></td>
+<td>View all stock levels</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/stock/low/</code></td>
+<td>View low stock items only</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/purchases/</code></td>
+<td>List / Create purchase orders</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/api/purchases/{id}/</code></td>
+<td>Retrieve / Update / Delete PO</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/purchases/{id}/confirm/</code></td>
+<td>Confirm PO, increase stock</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/orders/</code></td>
+<td>List / Create sales orders</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/PUT/DELETE</td>
+<td><code>/api/orders/{id}/</code></td>
+<td>Retrieve / Update / Delete SO</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/api/orders/{id}/confirm/</code></td>
+<td>Confirm SO, deduct stock</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td><code>/api/payments/</code></td>
+<td>List / Create payments</td>
+<td>Token</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/api/dashboard/</code></td>
+<td>Aggregated dashboard metrics</td>
+<td>Token</td>
+</tr>
+</tbody>
+</table>
+<h3>9.7 Django Backend Architecture</h3>
+<pre><code>backend/
+├── config/             # Project settings, root URLs
+│   ├── settings.py     # INSTALLED_APPS, DRF, CORS, Auth config
+│   └── urls.py         # Root URL routing
+├── accounts/           # User authentication &amp; profiles
+│   ├── models.py       # UserProfile (1:1 with User)
+│   ├── serializers.py  # Login, User serializers
+│   ├── views.py        # Login, Logout, Me endpoints
+│   ├── signals.py      # Auto-create UserProfile on User creation
+│   └── urls.py
+├── inventory/          # Product catalog &amp; stock
+│   ├── models.py       # Category, Product, Stock, Supplier, Customer
+│   ├── serializers.py  # Nested serializers with display names
+│   ├── views.py        # ModelViewSets with search/filter
+│   ├── signals.py      # Auto-create Stock on Product creation
+│   └── urls.py
+└── orders/             # Procurement, sales, payments
+    ├── models.py       # PurchaseOrder, PurchaseItem, SalesOrder, OrderItem, Payment
+    ├── serializers.py  # Nested create pattern (order + items in one request)
+    ├── views.py        # ViewSets + confirm actions + dashboard API
+    └── urls.py
+</code></pre>
+<h3>9.8 React Frontend Architecture</h3>
+<pre><code>frontend/src/
+├── components/         # Reusable UI elements
+│   ├── DataTable.jsx   # Sortable, striped data tables
+│   ├── FormInput.jsx   # Labelled text/number inputs
+│   ├── SelectInput.jsx # Dropdown selectors
+│   ├── Modal.jsx       # Overlay modal dialogs
+│   ├── StatusBadge.jsx # Colour-coded status pills
+│   ├── LoadingSpinner.jsx
+│   └── EmptyState.jsx  # Placeholder for empty data
+├── context/
+│   └── AuthContext.jsx  # Auth state, login/logout, token management
+├── layouts/
+│   └── MainLayout.jsx   # Sidebar + Header + Content area
+├── pages/               # Route-level page components
+│   ├── DashboardPage.jsx    # KPIs, charts, low-stock alerts
+│   ├── ProductsPage.jsx
+│   ├── CategoriesPage.jsx
+│   ├── SuppliersPage.jsx
+│   ├── CustomersPage.jsx
+│   ├── PurchasesPage.jsx    # Purchase order list
+│   ├── PurchaseCreatePage.jsx
+│   ├── PurchaseDetailPage.jsx
+│   ├── OrdersPage.jsx      # Sales order list
+│   ├── OrderCreatePage.jsx
+│   ├── OrderDetailPage.jsx
+│   ├── StockPage.jsx       # Stock levels with filter
+│   ├── PaymentsPage.jsx
+│   └── LoginPage.jsx
+├── services/
+│   └── api.js           # Axios instance + all API service functions
+├── App.jsx              # React Router configuration
+├── App.css              # Complete design system
+└── main.jsx             # Entry point with AuthProvider
+</code></pre>
+<h3>9.9 Application Flow Diagrams</h3>
+<p><strong>Sales Order Flow:</strong></p>
+<pre><code class="language-mermaid">flowchart TD
+    A[User Creates Sales Order] --&gt; B[Select Customer]
+    B --&gt; C[Add Line Items&lt;br/&gt;Product + Quantity + Price]
+    C --&gt; D[Submit Order]
+    D --&gt; E[API Creates SO + OrderItems&lt;br/&gt;Status: Draft]
+    E --&gt; F[User Views Order Detail]
+    F --&gt; G{Click Confirm?}
+    G --&gt;|Yes| H[API: Check Stock Availability]
+    H --&gt; I{Sufficient Stock?}
+    I --&gt;|Yes| J[Atomic: Deduct Stock&lt;br/&gt;+ Calculate Total&lt;br/&gt;+ Set Status: Confirmed]
+    I --&gt;|No| K[Error: Insufficient Stock]
+    J --&gt; L[User Records Payment]
+    L --&gt; M[Payment Saved Against SO]
+</code></pre>
+<p><strong>Purchase Order Flow:</strong></p>
+<pre><code class="language-mermaid">flowchart TD
+    A[User Creates Purchase Order] --&gt; B[Select Supplier]
+    B --&gt; C[Add Line Items&lt;br/&gt;Product + Quantity + Unit Cost]
+    C --&gt; D[Submit Order]
+    D --&gt; E[API Creates PO + PurchaseItems&lt;br/&gt;Status: Draft]
+    E --&gt; F[User Views PO Detail]
+    F --&gt; G{Click Confirm?}
+    G --&gt;|Yes| H[Atomic: Increase Stock&lt;br/&gt;+ Calculate Total&lt;br/&gt;+ Set Status: Confirmed]
+    H --&gt; I[Stock Levels Updated]
+</code></pre>
+<h3>9.10 Future Technology Roadmap</h3>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Timeline</th>
+<th>Technologies to Add</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Phase 2</td>
+<td>Months 7–12</td>
+<td>Celery + Redis</td>
+<td>Automated payment reminders, scheduled reports</td>
+</tr>
+<tr>
+<td>Phase 3</td>
+<td>Months 13–18</td>
+<td>Webcam/Scanner APIs, ReportLab</td>
+<td>Barcode scanning, PDF invoicing</td>
+</tr>
+<tr>
+<td>Phase 4</td>
+<td>Months 19–24</td>
+<td>Shopify/WooCommerce APIs, Stripe</td>
+<td>E-commerce integration, payment gateway</td>
+</tr>
+<tr>
+<td>Phase 5</td>
+<td>Months 25–36</td>
+<td>TensorFlow/Prophet, React Native</td>
+<td>AI demand forecasting, mobile app</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h1>PHASE 3 — PROOF OF CONCEPT</h1>
+<hr />
+<h2>10. Proof of Concept</h2>
+<h3>10.1 Proof of Concept Scope</h3>
+<p>The proof of concept validates the core technical architecture and key business workflows:</p>
+<table>
+<thead>
+<tr>
+<th>PoC Element</th>
+<th>What Was Proved</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Django REST API</td>
+<td>RESTful endpoints can serve JSON data to a decoupled frontend</td>
+<td>22+ endpoints operational</td>
+</tr>
+<tr>
+<td>Token Authentication</td>
+<td>Stateless auth works for SPA applications</td>
+<td>Login returns token; all endpoints validated</td>
+</tr>
+<tr>
+<td>Nested Serializer Create</td>
+<td>Orders + items created atomically in one request</td>
+<td>PurchaseOrder and SalesOrder creation verified</td>
+</tr>
+<tr>
+<td>Atomic Stock Transactions</td>
+<td><code>transaction.atomic()</code> prevents partial stock updates</td>
+<td>Confirm action tested with insufficient stock scenario</td>
+</tr>
+<tr>
+<td>Django Signals</td>
+<td>Auto-creation of Stock and UserProfile records</td>
+<td>Verified: new Product → Stock(quantity=0) created</td>
+</tr>
+<tr>
+<td>React + Axios Integration</td>
+<td>Frontend successfully communicates with backend API</td>
+<td>All CRUD operations, auth flow, dashboard rendering</td>
+</tr>
+<tr>
+<td>Responsive Design</td>
+<td>Single interface works across device sizes</td>
+<td>Tested at 1024px, 768px, 480px viewpoints</td>
+</tr>
+<tr>
+<td>Dashboard Visualisation</td>
+<td>Recharts renders real-time data from API</td>
+<td>Line chart, pie chart, KPI cards rendering correctly</td>
+</tr>
+</tbody>
+</table>
+<h3>10.2 PoC Demonstration</h3>
+<p>The PoC is deployable and testable via:</p>
+<pre><code class="language-bash"># Backend
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+# Frontend
+cd frontend
+npm install
+npm run dev
+</code></pre>
+<hr />
+<h2>11. Final Combined Report</h2>
+<h3>11.1 PoC Results Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Objective</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend API fully operational</td>
+<td>✅ Complete</td>
+<td>22+ endpoints, all CRUD operations</td>
+</tr>
+<tr>
+<td>Authentication flow working</td>
+<td>✅ Complete</td>
+<td>Login, Logout, Token validation</td>
+</tr>
+<tr>
+<td>Order lifecycle functional</td>
+<td>✅ Complete</td>
+<td>Create → View → Confirm → Stock updated</td>
+</tr>
+<tr>
+<td>Dashboard with real data</td>
+<td>✅ Complete</td>
+<td>KPIs, revenue chart, order breakdown, low-stock</td>
+</tr>
+<tr>
+<td>Responsive UI</td>
+<td>✅ Complete</td>
+<td>Desktop, tablet, mobile tested</td>
+</tr>
+<tr>
+<td>Payment recording</td>
+<td>✅ Complete</td>
+<td>Payments linked to Sales Orders</td>
+</tr>
+<tr>
+<td>Stock management</td>
+<td>✅ Complete</td>
+<td>Atomic increase (PO confirm) / decrease (SO confirm)</td>
+</tr>
+</tbody>
+</table>
+<h3>11.2 PoC Recommendations</h3>
+<ol>
+<li><strong>Proceed to full prototyping</strong> — all technical risks mitigated.</li>
+<li><strong>Migrate to PostgreSQL</strong> before production deployment.</li>
+<li><strong>Add comprehensive error handling</strong> on frontend (toast notifications).</li>
+<li><strong>Implement role-based UI rendering</strong> for Admin vs. Staff views.</li>
+</ol>
+<hr />
+<hr />
+<h1>PHASE 4 — PROTOTYPING &amp; EXPERIMENTATION</h1>
+<hr />
+<h2>12. Prototyping and Experimentation</h2>
+<h3>12.1 Prototype Architecture</h3>
+<p>The full prototype has been developed with the following technical stack:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend</td>
+<td>React 18 + Vite + React Router + Axios + Recharts + Lucide React</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Django 5 + Django REST Framework + Token Authentication</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>SQLite (development)</td>
+</tr>
+<tr>
+<td>Version Control</td>
+<td>Git + GitHub (https://github.com/zkestroyer/casestudy)</td>
+</tr>
+</tbody>
+</table>
+<h3>12.2 Implemented Features</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Implementation Details</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>User Authentication</strong></td>
+<td>Token-based login/logout, AuthContext for state management</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Product Management</strong></td>
+<td>CRUD with nested Stock serializer, category association</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Category Management</strong></td>
+<td>CRUD with modal-based create/edit</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Supplier Management</strong></td>
+<td>CRUD with contact details</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Customer Management</strong></td>
+<td>CRUD with contact details</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Purchase Orders</strong></td>
+<td>Create with nested items, view list, view detail, confirm action</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Sales Orders</strong></td>
+<td>Create with nested items, stock validation on confirm</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Payment Recording</strong></td>
+<td>Create payments against Sales Orders with method selection</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Stock Management</strong></td>
+<td>Real-time stock view, low-stock filter, status badges</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Dashboard</strong></td>
+<td>KPI cards, Revenue Line Chart, Order Status Pie Chart, Low Stock table</td>
+<td>✅ Complete</td>
+</tr>
+<tr>
+<td><strong>Responsive Design</strong></td>
+<td>Desktop, tablet, mobile layouts with collapsible sidebar</td>
+<td>✅ Complete</td>
+</tr>
+</tbody>
+</table>
+<h3>12.3 Key Technical Decisions</h3>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stock as separate model (1:1 with Product)</strong></td>
+<td>Enables high-frequency quantity updates without locking the Product record</td>
+</tr>
+<tr>
+<td><strong>Junction tables over ManyToManyField</strong></td>
+<td>PurchaseItem and OrderItem carry additional data (quantity, price, subtotal)</td>
+</tr>
+<tr>
+<td><strong><code>transaction.atomic()</code> for confirmations</strong></td>
+<td>Ensures stock changes and status updates succeed or fail together</td>
+</tr>
+<tr>
+<td><strong>Django Signals for auto-creation</strong></td>
+<td>Guarantees every Product has a Stock record and every User has a Profile</td>
+</tr>
+<tr>
+<td><strong>Nested serializer create pattern</strong></td>
+<td>Orders and items created in a single API request for atomicity</td>
+</tr>
+<tr>
+<td><strong>Axios interceptors</strong></td>
+<td>Automatically attaches auth token to every request</td>
+</tr>
+<tr>
+<td><strong>Context API over Redux</strong></td>
+<td>Simpler state management suitable for auth-only global state</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>13. Prototyping and Experimentation Log</h2>
+<h3>13.1 Development Timeline</h3>
+<table>
+<thead>
+<tr>
+<th>Date Range</th>
+<th>Activity</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Week 1</td>
+<td>Backend models, migrations, admin, signals</td>
+<td>All 11 entities created and migrated</td>
+</tr>
+<tr>
+<td>Week 2</td>
+<td>Serializers, ViewSets, URL routing</td>
+<td>22+ API endpoints operational</td>
+</tr>
+<tr>
+<td>Week 3</td>
+<td>Authentication (login, logout, me), permissions</td>
+<td>Token auth working end-to-end</td>
+</tr>
+<tr>
+<td>Week 3–4</td>
+<td>React setup, routing, design system, LoginPage</td>
+<td>Frontend shell with auth flow</td>
+</tr>
+<tr>
+<td>Week 4–5</td>
+<td>CRUD pages (Products, Categories, Suppliers, Customers)</td>
+<td>All entity management pages complete</td>
+</tr>
+<tr>
+<td>Week 5–6</td>
+<td>Order pages (Create, List, Detail, Confirm)</td>
+<td>Purchase and Sales order lifecycle working</td>
+</tr>
+<tr>
+<td>Week 6</td>
+<td>Payments page, Stock page</td>
+<td>Payment recording and stock viewing</td>
+</tr>
+<tr>
+<td>Week 6–7</td>
+<td>Dashboard with Recharts (Line chart, Pie chart, KPIs)</td>
+<td>Real-time dashboard with actual API data</td>
+</tr>
+<tr>
+<td>Week 7</td>
+<td>Bug fixes (order_date payload, unit_cost mapping, stock columns)</td>
+<td>All reported issues resolved</td>
+</tr>
+<tr>
+<td>Week 8</td>
+<td>UI polish, responsive design, documentation</td>
+<td>Professional design system applied</td>
+</tr>
+</tbody>
+</table>
+<h3>13.2 Testing Results</h3>
+<table>
+<thead>
+<tr>
+<th>Test ID</th>
+<th>Feature</th>
+<th>Test Description</th>
+<th>Expected Result</th>
+<th>Actual Result</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TC01</td>
+<td>Login</td>
+<td>Valid credentials</td>
+<td>200 + Token</td>
+<td>200 + Token</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC02</td>
+<td>Login</td>
+<td>Invalid password</td>
+<td>401 Unauthorized</td>
+<td>401 Unauthorized</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC03</td>
+<td>Create Product</td>
+<td>Valid payload</td>
+<td>201 Created + Stock auto-created</td>
+<td>201 + Stock created</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC04</td>
+<td>Create Product</td>
+<td>Missing required fields</td>
+<td>400 Bad Request</td>
+<td>400 Bad Request</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC05</td>
+<td>View Stock</td>
+<td>GET /api/stock/</td>
+<td>Stock list with product names</td>
+<td>Correct data returned</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC06</td>
+<td>Create Sales Order</td>
+<td>Valid customer + items + order_date</td>
+<td>201 Created</td>
+<td>201 Created</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC07</td>
+<td>Confirm Sales Order</td>
+<td>Sufficient stock</td>
+<td>Stock deducted, status confirmed</td>
+<td>Works correctly</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC08</td>
+<td>Confirm Sales Order</td>
+<td>Insufficient stock</td>
+<td>400 with error message</td>
+<td>"Insufficient stock" returned</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC09</td>
+<td>Create Purchase Order</td>
+<td>Valid supplier + items + unit_cost</td>
+<td>201 Created</td>
+<td>201 Created</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC10</td>
+<td>Confirm Purchase Order</td>
+<td>Draft/Pending PO</td>
+<td>Stock incremented, confirmed</td>
+<td>Works correctly</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC11</td>
+<td>Record Payment</td>
+<td>Valid sales_order + amount + method</td>
+<td>Payment saved</td>
+<td>Payment saved</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC12</td>
+<td>Auth Protection</td>
+<td>Access API without token</td>
+<td>401 Unauthorized</td>
+<td>401 Unauthorized</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC13</td>
+<td>Dashboard</td>
+<td>GET /api/dashboard/</td>
+<td>All KPIs and chart data</td>
+<td>All metrics returned</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC14</td>
+<td>Delete Product</td>
+<td>DELETE /api/products/{id}/</td>
+<td>204 No Content</td>
+<td>204 No Content</td>
+<td>✅ Pass</td>
+</tr>
+<tr>
+<td>TC15</td>
+<td>Responsive UI</td>
+<td>480px viewport</td>
+<td>Layout adapts</td>
+<td>Sidebar collapses, content fills</td>
+<td>✅ Pass</td>
+</tr>
+</tbody>
+</table>
+<h3>13.3 Bugs Encountered and Resolved</h3>
+<table>
+<thead>
+<tr>
+<th>Bug</th>
+<th>Root Cause</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orders not creating</td>
+<td><code>order_date</code> field missing from frontend payload</td>
+<td>Added <code>order_date: new Date().toISOString().split('T')[0]</code> to payload</td>
+</tr>
+<tr>
+<td>Purchase prices wrong</td>
+<td>Frontend sending <code>unit_price</code> but backend expects <code>unit_cost</code></td>
+<td>Mapped field correctly in PurchaseCreatePage.jsx</td>
+</tr>
+<tr>
+<td>Stock levels showing empty</td>
+<td>Frontend column keys (<code>name</code>, <code>stock_quantity</code>) didn't match API response (<code>product_name</code>, <code>quantity</code>)</td>
+<td>Updated StockPage.jsx column definitions</td>
+</tr>
+<tr>
+<td>Payments not saving</td>
+<td>Frontend sending <code>order</code> key but backend expects <code>sales_order</code></td>
+<td>Added <code>sales_order: formData.order</code> mapping</td>
+</tr>
+<tr>
+<td>Dashboard charts showing empty</td>
+<td>Revenue history had no data fallback</td>
+<td>Ensured 0 values returned for months with no orders</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<hr />
+<h1>PHASE 5 — DOCUMENTATION &amp; HANDOVER</h1>
+<hr />
+<h2>14. Complete Documentation &amp; Project Course Report</h2>
+<h3>14.1 Project Summary</h3>
+<p><strong>OpsFlow</strong> is a full-stack web application for business inventory and order management, built with Django REST Framework (backend) and React + Vite (frontend). It provides:</p>
+<ul>
+<li>Complete CRUD for Products, Categories, Suppliers, Customers</li>
+<li>Full Purchase Order and Sales Order lifecycle with atomic stock management</li>
+<li>Payment recording against Sales Orders</li>
+<li>Real-time dashboard with KPIs, charts, and low-stock alerts</li>
+<li>Token-based authentication</li>
+<li>Responsive design for desktop, tablet, and mobile</li>
+</ul>
+<h3>14.2 Limitations</h3>
+<table>
+<thead>
+<tr>
+<th>Limitation</th>
+<th>Impact</th>
+<th>Future Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQLite in development</td>
+<td>Not suitable for concurrent production</td>
+<td>Migrate to PostgreSQL</td>
+</tr>
+<tr>
+<td>No real-time push updates</td>
+<td>Dashboard requires manual refresh</td>
+<td>WebSocket integration</td>
+</tr>
+<tr>
+<td>Single user role</td>
+<td>No Admin vs. Staff UI distinction</td>
+<td>Role-based UI rendering</td>
+</tr>
+<tr>
+<td>No barcode scanning</td>
+<td>Manual product lookup</td>
+<td>Webcam/scanner integration</td>
+</tr>
+<tr>
+<td>No multi-warehouse</td>
+<td>Single-location only</td>
+<td>Multi-location stock model</td>
+</tr>
+<tr>
+<td>No email notifications</td>
+<td>No automated alerts via email</td>
+<td>Celery + SendGrid</td>
+</tr>
+</tbody>
+</table>
+<h3>14.3 Future Improvements</h3>
+<ol>
+<li>Automated low-stock email/SMS alerts (Celery + SendGrid)</li>
+<li>Barcode scanning via webcam</li>
+<li>Multi-warehouse stock tracking with transfers</li>
+<li>PDF invoice generation (ReportLab/WeasyPrint)</li>
+<li>Role-based UI rendering (Admin, Manager, Staff)</li>
+<li>AI demand forecasting (TensorFlow/Prophet)</li>
+<li>E-commerce integration (Shopify, WooCommerce)</li>
+<li>Native mobile app (React Native / Flutter)</li>
+<li>Payment gateway integration (Stripe/PayPal)</li>
+<li>Full audit log with before/after change tracking</li>
+</ol>
+<h3>14.4 Market and Financial Feasibility Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAM</td>
+<td>$2.74 billion (2025) → $5.41 billion (2032)</td>
+</tr>
+<tr>
+<td>SAM</td>
+<td>$1.15 billion (English-speaking markets)</td>
+</tr>
+<tr>
+<td>SOM</td>
+<td>$138 million (target segment)</td>
+</tr>
+<tr>
+<td>Entry pricing</td>
+<td>$39/month</td>
+</tr>
+<tr>
+<td>Break-even</td>
+<td>7 subscribers</td>
+</tr>
+<tr>
+<td>Year 3 ARR</td>
+<td>$1,638,000</td>
+</tr>
+<tr>
+<td>Gross margin</td>
+<td>&gt;80%</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>15. Finalize the Project</h2>
+<h3>15.1 Repository</h3>
+<p><strong>GitHub:</strong> https://github.com/zkestroyer/casestudy</p>
+<h3>15.2 Project Structure</h3>
+<pre><code>case study/
+├── backend/                    # Django REST API
+│   ├── config/                 # Project configuration
+│   ├── accounts/               # Authentication &amp; profiles
+│   ├── inventory/              # Products, Categories, Stock, Suppliers, Customers
+│   ├── orders/                 # POs, SOs, Payments, Dashboard
+│   ├── manage.py
+│   └── requirements.txt
+├── frontend/                   # React + Vite
+│   ├── src/
+│   │   ├── components/         # Reusable UI components
+│   │   ├── context/            # AuthContext
+│   │   ├── layouts/            # MainLayout
+│   │   ├── pages/              # All page components
+│   │   ├── services/           # API service layer
+│   │   ├── App.jsx             # Router
+│   │   ├── App.css             # Design system
+│   │   └── main.jsx            # Entry point
+│   └── package.json
+├── docs/                       # Documentation
+│   ├── documentation.md        # Full technical documentation
+│   └── research_and_proposal.md # This R&amp;D document
+├── README.md
+└── .gitignore
+</code></pre>
+<h3>15.3 Setup Instructions</h3>
+<pre><code class="language-bash"># Clone
+git clone https://github.com/zkestroyer/casestudy.git
+cd casestudy
+
+# Backend
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+
+# Frontend (new terminal)
+cd frontend
+npm install
+npm run dev
+</code></pre>
+<h3>15.4 Handover Checklist</h3>
+<ul>
+<li>[x] All source code committed to GitHub</li>
+<li>[x] Backend API fully functional (22+ endpoints)</li>
+<li>[x] Frontend responsive and operational</li>
+<li>[x] Database migrations applied</li>
+<li>[x] Technical documentation complete</li>
+<li>[x] R&amp;D Process document complete</li>
+<li>[x] README with setup instructions</li>
+<li>[x] .gitignore configured</li>
+<li>[x] All tests passing</li>
+</ul>
+<hr />
+<h2>References</h2>
+<ol>
+<li>Research and Markets. (2026). <em>Small Businesses Inventory Management Software Market — Global Forecast 2026–2032</em>. $2.74B in 2025.</li>
+<li>360iResearch. (2026). <em>Barcode Inventory Management Software Market</em>. $1.28B in 2025, 11.50% CAGR.</li>
+<li>Mordor Intelligence. (2025). <em>Inventory Management Software Market</em>. SMEs at 13.12% CAGR.</li>
+<li>Sharma et al. <em>Micro-enterprise inventory methods</em>. 62.5% manual methods.</li>
+<li>SME10x. (2026). <em>UAE SMEs: Simple Tools Win</em>. 64% on spreadsheets.</li>
+<li>Cin7. (2025). <em>Why SMBs Aren't Using AI</em>. 47% want automation.</li>
+<li>Capterra. (2026). <em>Benefits of Inventory Management</em>. 49% switch due to inefficiency.</li>
+<li>Zenatta. (2025). <em>Zoho Inventory Review</em>. Free–$249/month.</li>
+<li>Sortly. (2026). <em>Cost of Inventory Management</em>. Odoo from $31.10/user/month.</li>
+<li>Square. (2025). <em>Commerce Software</em>. Free–$149/location/month.</li>
+<li>SmallBizTrends. (2025). <em>Best Inventory Programs</em>. inFlow $89–$1,055/month.</li>
+<li>Netstock. (2025). <em>Benchmark Report</em>. 48% SMBs using AI.</li>
+<li>Suda Tianyao. (2026). <em>SME Inventory Penetration</em>. 68.3% adoption.</li>
+<li>Django Software Foundation. <em>Django Documentation</em>. https://docs.djangoproject.com/</li>
+<li>React. <em>React Documentation</em>. https://react.dev/</li>
+<li>Django REST Framework. <em>DRF Documentation</em>. https://www.django-rest-framework.org/</li>
+</ol>
+<hr />
+<p><em>End of R&amp;D Process Document</em></p></body></html>
