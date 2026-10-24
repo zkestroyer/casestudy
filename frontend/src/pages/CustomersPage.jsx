@@ -4,31 +4,28 @@ import { customersAPI } from '../services/api';
 import DataTable from '../components/DataTable';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ConfirmDialog from '../components/ConfirmDialog';
+import { Search, UserPlus } from 'lucide-react';
 
 /**
  * ACADEMIC PURPOSE:
- * Displays a list of all customers and provides actions to edit or delete them.
- * 
- * STATE MANAGEMENT:
- * - useState manages the customer list (data), loading state, and delete confirmation dialog state.
- * - useEffect is used to fetch the initial data payload exactly once when the component mounts.
- * 
- * ERROR HANDLING:
- * - try/catch is used during async API calls to prevent unhandled promise rejections.
+ * Displays a list of all customers, provides search filtering using DRF backend SearchFilter,
+ * and handles editing and deletion actions with modal confirmation.
  */
 const CustomersPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [currentId, setCurrentId] = useState(null);
   const navigate = useNavigate();
 
-  const loadData = async () => { 
+  const loadData = async (query = '') => { 
     setLoading(true); 
     setError(null);
     try {
-      const res = await customersAPI.getAll();
+      const params = query ? { search: query } : {};
+      const res = await customersAPI.getAll(params);
       setData(res.data);
     } catch (err) {
       console.error("Error loading customers:", err);
@@ -38,12 +35,17 @@ const CustomersPage = () => {
     }
   };
   
-  useEffect(() => { loadData(); }, []);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      loadData(searchTerm);
+    }, 300);
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
 
   const handleDelete = async () => { 
     try {
       await customersAPI.delete(currentId);
-      loadData();
+      loadData(searchTerm);
     } catch (err) {
       console.error("Error deleting customer:", err);
       alert("Failed to delete customer.");
@@ -68,13 +70,34 @@ const CustomersPage = () => {
   return (
     <div>
       <div className="page-header">
-        <h1 className="page-title">Customers</h1>
-        <button className="btn btn-primary" onClick={() => navigate('/customers/new')}>Add Customer</button>
+        <div>
+          <h1 className="page-title">Customers</h1>
+          <p style={{ color: '#64748b', fontSize: '0.875rem' }}>Manage customer profiles and contact details.</p>
+        </div>
+        <button className="btn btn-primary" onClick={() => navigate('/customers/new')}>
+          <UserPlus size={16} style={{ marginRight: '6px' }} /> Add Customer
+        </button>
       </div>
+
+      <div style={{ marginBottom: '1.25rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <div style={{ position: 'relative', width: '300px' }}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search name, email, or phone..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            style={{ paddingLeft: '2rem' }}
+          />
+          <Search size={16} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8' }} />
+        </div>
+      </div>
+
       {error && <div className="alert alert-danger">{error}</div>}
       {loading ? <LoadingSpinner /> : <DataTable data={data} columns={columns} />}
       <ConfirmDialog isOpen={confirmOpen} onClose={() => setConfirmOpen(false)} onConfirm={handleDelete} message="Delete this customer?" />
     </div>
   );
 };
+
 export default CustomersPage;

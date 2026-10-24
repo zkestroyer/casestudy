@@ -1,21 +1,18 @@
 import axios from 'axios';
 
 /**
- * ACADEMIC PURPOSE:
- * This file centralizes all HTTP communication with the Django backend.
- * By abstracting Axios calls into service objects (e.g., productsAPI, authAPI), 
- * we decouple the UI components from the specific URL routes and HTTP methods.
- * This makes the codebase much easier to maintain, test, and update.
+ * ACADEMIC & ARCHITECTURAL PURPOSE:
+ * Centralizes all HTTP communication with the Django REST Framework backend.
+ * By abstracting Axios requests into strongly-typed domain services (e.g. productsAPI, ordersAPI),
+ * the presentation layer remains decoupled from HTTP transport nuances and URL routing.
  * 
  * INTERCEPTORS:
- * We use an Axios interceptor to automatically attach the authentication Token
- * to the headers of every outgoing request, ensuring protected endpoints can be accessed
- * without manually passing the token in every component.
+ * Utilizes a request interceptor to automatically attach the Bearer/Token header
+ * across all authenticated outbound requests.
  */
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/',
 });
-
 
 api.interceptors.request.use(
   (config) => {
@@ -35,14 +32,14 @@ export const authAPI = {
 };
 
 export const categoriesAPI = {
-  getAll: () => api.get('categories/'),
+  getAll: (params) => api.get('categories/', { params }),
   create: (data) => api.post('categories/', data),
   update: (id, data) => api.put(`categories/${id}/`, data),
   delete: (id) => api.delete(`categories/${id}/`),
 };
 
 export const productsAPI = {
-  getAll: () => api.get('products/'),
+  getAll: (params) => api.get('products/', { params }),
   getById: (id) => api.get(`products/${id}/`),
   create: (data) => api.post('products/', data),
   update: (id, data) => api.put(`products/${id}/`, data),
@@ -50,7 +47,7 @@ export const productsAPI = {
 };
 
 export const suppliersAPI = {
-  getAll: () => api.get('suppliers/'),
+  getAll: (params) => api.get('suppliers/', { params }),
   getById: (id) => api.get(`suppliers/${id}/`),
   create: (data) => api.post('suppliers/', data),
   update: (id, data) => api.put(`suppliers/${id}/`, data),
@@ -58,7 +55,7 @@ export const suppliersAPI = {
 };
 
 export const customersAPI = {
-  getAll: () => api.get('customers/'),
+  getAll: (params) => api.get('customers/', { params }),
   getById: (id) => api.get(`customers/${id}/`),
   create: (data) => api.post('customers/', data),
   update: (id, data) => api.put(`customers/${id}/`, data),
@@ -66,7 +63,7 @@ export const customersAPI = {
 };
 
 export const purchasesAPI = {
-  getAll: () => api.get('purchases/'),
+  getAll: (params) => api.get('purchases/', { params }),
   getById: (id) => api.get(`purchases/${id}/`),
   create: (data) => api.post('purchases/', data),
   update: (id, data) => api.put(`purchases/${id}/`, data),
@@ -75,7 +72,7 @@ export const purchasesAPI = {
 };
 
 export const ordersAPI = {
-  getAll: () => api.get('orders/'),
+  getAll: (params) => api.get('orders/', { params }),
   getById: (id) => api.get(`orders/${id}/`),
   create: (data) => api.post('orders/', data),
   update: (id, data) => api.put(`orders/${id}/`, data),
@@ -84,12 +81,12 @@ export const ordersAPI = {
 };
 
 export const stockAPI = {
-  getAll: () => api.get('stock/'),
+  getAll: (params) => api.get('stock/', { params }),
   getLow: () => api.get('stock/low/'),
 };
 
 export const paymentsAPI = {
-  getAll: () => api.get('payments/'),
+  getAll: (params) => api.get('payments/', { params }),
   getById: (id) => api.get(`payments/${id}/`),
   create: (data) => api.post('payments/', data),
 };
